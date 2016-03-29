@@ -281,7 +281,7 @@ defmodule Math do
   def isqrt(x), do: _isqrt(x, 1, div((1 + x), 2))
     
   defp _isqrt(x, m, n) when abs(m - n) <= 1 and n * n <= x, do: n
-  defp _isqrt(x, m, n) when abs(m - n) <= 1, do: n - 1
+  defp _isqrt(_x, m, n) when abs(m - n) <= 1, do: n - 1
 
   defp _isqrt(x, _, n) do
     _isqrt(x, n, div(n + div(x, n), 2))
