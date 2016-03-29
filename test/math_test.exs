@@ -1,5 +1,5 @@
 defmodule MathTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   import Math
   doctest Math
 
@@ -114,9 +114,27 @@ defmodule MathTest do
   end
 
   test "pow" do
-    assert pow(2, 2) <~> 4
-    assert pow(2, 3) <~> 8
-    assert pow(3, 3) <~> 27
+    # Integer powers
+    assert pow(2, 2) == 4
+    assert pow(2, 3) == 8
+    assert pow(3, 3) == 27
+    assert pow(2, 60) == 1152921504606846976
+    assert pow(256, 8) == 18446744073709551616
+
+    # Negative integer powers
+    assert pow(2, -2) <~> 0.25
+    assert pow(2, -2) <~> 0.25
+    assert pow(10, -8) <~> 1.0e-8
+
+    # Floating point
+    assert pow(2, 2.0) <~> 4.0
+    assert pow(2.0, 3) <~> 8.0
+
+    # Floating point powers with decimals
+    assert pow(2, (1/2) ) <~> sqrt(2)
+    assert pow(1000, (1/4) ) <~> sqrt(sqrt(1000))
+    assert pow(1000, (1/4) ) <~> sqrt(sqrt(1000))
+
   end
 
   test "sqrt" do
@@ -125,5 +143,17 @@ defmodule MathTest do
     Enum.each(1..10, fn(x) ->
       assert sqrt(pow(x, 2)) <~> x
     end)
+  end
+
+  test "isqrt" do
+    assert isqrt(0) == 0
+    assert isqrt(1) == 1
+    assert isqrt(9) == 3
+    assert isqrt(10) == 3
+    assert isqrt(100) == 10
+    assert isqrt(65535) == 255
+    assert isqrt(65536) == 256
+    assert isqrt(15241578780673678546105778281054720515622620750190521) == 123456789123456789123456789
+    assert_raise ArithmeticError, fn -> isqrt(-2) end
   end
 end
