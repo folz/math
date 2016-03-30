@@ -72,6 +72,8 @@ defmodule Math do
     end
   end
 
+  # General
+
   @doc """
   Arithmetic exponentiation. Returns *x* to the *n* -th power.
 
@@ -95,7 +97,7 @@ defmodule Math do
       7888609052210118054117285652827862296732064351090230047702789306640625
       iex> Math.pow(5.0, 100)
       7.888609052210118e69
-      iex> Math.pow(2, (1/2))
+      iex> Math.pow(2, (1 / 2))
       1.4142135623730951
   """
   @spec pow(number, number) :: number
@@ -121,6 +123,20 @@ defmodule Math do
   """
   @spec sqrt(x) :: float
   defdelegate sqrt(x), to: :math
+
+  @doc """
+  Returns the non-negative nth-root of *x*.
+
+  ## Examples
+
+      iex> Math.nth_root(27, 3)
+      3.0
+      iex> Math.nth_root(65536, 8)
+      4.0
+  """
+  @spec nth_root(x, number) :: float
+  def nth_root(x, n)
+  def nth_root(x, n), do: pow(x, 1 / n)
 
   @doc """
   Returns the non-negative integer square root of *x* (rounded towards zero)
@@ -251,6 +267,9 @@ defmodule Math do
   @spec log10(x) :: float
   defdelegate log10(x), to: :math
 
+
+  # Trigonometry
+
   @doc """
   Converts degrees to radians
 
@@ -323,6 +342,8 @@ defmodule Math do
   """
   @spec atan2(y, x) :: float
   defdelegate atan2(y, x), to: :math
+
+  # Advanced Trigonometry
 
   @doc """
   Computes the hyperbolic sine of *x* (expressed in radians).
