@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.4">
-    <title>Math – math v0.0.1</title>
+    <title>Math – math v0.1.0</title>
     <link rel="stylesheet" href="dist/app-1e374caa3d.css" />
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -27,7 +27,7 @@
         math
       </h1>
       <h2 class="sidebar-projectVersion">
-        v0.0.1
+        v0.1.0
       </h2>
     </div>
     
@@ -59,7 +59,7 @@
 
 
       <h1>
-        <small class="visible-xs">math v0.0.1</small>
+        <small class="visible-xs">math v0.1.0</small>
         Math
         
         
@@ -111,7 +111,7 @@
     <a href="#%3C~%3E/2">x &lt;~&gt; y</a>
   </div>
   
-    <div class="summary-synopsis"><p>Equality-ish test for whether x and y are nearly equal</p>
+    <div class="summary-synopsis"><p>Equality-test for whether <em>x</em> and <em>y</em> are <em>nearly</em> equal</p>
 </div>
   
 </div>
@@ -120,7 +120,7 @@
     <a href="#acos/1">acos(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Computes the arc cosine of x</p>
+    <div class="summary-synopsis"><p>Computes the arc cosine of <em>x</em>. (expressed in radians)</p>
 </div>
   
 </div>
@@ -129,7 +129,7 @@
     <a href="#acosh/1">acosh(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Computes the inverse hyperbolic cosine of x</p>
+    <div class="summary-synopsis"><p>Computes the inverse hyperbolic cosine of <em>x</em></p>
 </div>
   
 </div>
@@ -138,7 +138,7 @@
     <a href="#asin/1">asin(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Computes the arc sine of x</p>
+    <div class="summary-synopsis"><p>Computes the arc sine of <em>x</em>. (expressed in radians)</p>
 </div>
   
 </div>
@@ -147,7 +147,7 @@
     <a href="#asinh/1">asinh(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Computes the inverse hyperbolic sine of x</p>
+    <div class="summary-synopsis"><p>Computes the inverse hyperbolic sine of <em>x</em></p>
 </div>
   
 </div>
@@ -156,7 +156,7 @@
     <a href="#atan/1">atan(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Computes the arc tangent of x</p>
+    <div class="summary-synopsis"><p>Computes the arc tangent of <em>x</em>. (expressed in radians)</p>
 </div>
   
 </div>
@@ -165,7 +165,7 @@
     <a href="#atan2/2">atan2(y, x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Computes the arc tangent given y and x</p>
+    <div class="summary-synopsis"><p>Computes the arc tangent given <em>y</em> and <em>x</em>. (expressed in radians)</p>
 </div>
   
 </div>
@@ -174,7 +174,7 @@
     <a href="#atanh/1">atanh(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Computes the inverse hyperbolic tangent of x</p>
+    <div class="summary-synopsis"><p>Computes the inverse hyperbolic tangent of <em>x</em></p>
 </div>
   
 </div>
@@ -183,7 +183,7 @@
     <a href="#cos/1">cos(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Computes the cosine of x</p>
+    <div class="summary-synopsis"><p>Computes the cosine of <em>x</em></p>
 </div>
   
 </div>
@@ -192,7 +192,16 @@
     <a href="#cosh/1">cosh(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Computes the hyperbolic cosine of x (expressed in radians)</p>
+    <div class="summary-synopsis"><p>Computes the hyperbolic cosine of <em>x</em> (expressed in radians)</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#deg2rad/1">deg2rad(x)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Converts degrees to radians</p>
 </div>
   
 </div>
@@ -201,7 +210,7 @@
     <a href="#e/0">e()</a>
   </div>
   
-    <div class="summary-synopsis"><p>The mathematical constant E (e)</p>
+    <div class="summary-synopsis"><p>The mathematical constant <em>ℯ</em> (e)</p>
 </div>
   
 </div>
@@ -210,7 +219,16 @@
     <a href="#exp/1">exp(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns e to the xth power</p>
+    <div class="summary-synopsis"><p>Returns ℯ to the xth power</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#isqrt/1">isqrt(x)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the non-negative integer square root of <em>x</em> (rounded towards zero)</p>
 </div>
   
 </div>
@@ -219,7 +237,7 @@
     <a href="#log/1">log(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns the natural logarithm (base e) of x</p>
+    <div class="summary-synopsis"><p>Returns the natural logarithm (base <code>ℯ</code>) of <em>x</em></p>
 </div>
   
 </div>
@@ -228,7 +246,7 @@
     <a href="#log10/1">log10(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Computes the logarithm (base 10) of x</p>
+    <div class="summary-synopsis"><p>Computes the common logarithm (base <code>10</code>) of <em>x</em></p>
 </div>
   
 </div>
@@ -237,7 +255,7 @@
     <a href="#log2/1">log2(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns the logarithm (base 2) of x</p>
+    <div class="summary-synopsis"><p>Returns the binary logarithm (base <code>2</code>) of <em>x</em></p>
 </div>
   
 </div>
@@ -246,16 +264,25 @@
     <a href="#pi/0">pi()</a>
   </div>
   
-    <div class="summary-synopsis"><p>The mathematical constant PI</p>
+    <div class="summary-synopsis"><p>The mathematical constant <em>π</em> (pi)</p>
 </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#pow/2">pow(x, y)</a>
+    <a href="#pow/2">pow(x, n)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns x to the yth power</p>
+    <div class="summary-synopsis"><p>Arithmetic exponentiation. Returns <em>x</em> to the <em>n</em> -th power</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#rad2deg/1">rad2deg(x)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Converts radians to degrees</p>
 </div>
   
 </div>
@@ -264,7 +291,7 @@
     <a href="#sin/1">sin(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Computes the sine of x</p>
+    <div class="summary-synopsis"><p>Computes the sine of <em>x</em></p>
 </div>
   
 </div>
@@ -273,7 +300,7 @@
     <a href="#sinh/1">sinh(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Computes the hyperbolic sine of x (expressed in radians)</p>
+    <div class="summary-synopsis"><p>Computes the hyperbolic sine of <em>x</em> (expressed in radians)</p>
 </div>
   
 </div>
@@ -282,7 +309,7 @@
     <a href="#sqrt/1">sqrt(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns the non-negative square root of x</p>
+    <div class="summary-synopsis"><p>Returns the non-negative square root of <em>x</em></p>
 </div>
   
 </div>
@@ -291,7 +318,7 @@
     <a href="#tan/1">tan(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Computes the tangent of x (expressed in radians)</p>
+    <div class="summary-synopsis"><p>Computes the tangent of <em>x</em> (expressed in radians)</p>
 </div>
   
 </div>
@@ -300,7 +327,7 @@
     <a href="#tanh/1">tanh(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Computes the hyperbolic tangent of x (expressed in radians)</p>
+    <div class="summary-synopsis"><p>Computes the hyperbolic tangent of <em>x</em> (expressed in radians)</p>
 </div>
   
 </div>
@@ -309,7 +336,7 @@
     <a href="#tau/0">tau()</a>
   </div>
   
-    <div class="summary-synopsis"><p>The mathematical constant TAU</p>
+    <div class="summary-synopsis"><p>The mathematical constant <em>τ</em> (tau)</p>
 </div>
   
 </div>
@@ -373,7 +400,13 @@
     </div>
   
   <section class="docstring">
-    <p>Equality-ish test for whether x and y are nearly equal.</p>
+    <p>Equality-test for whether <em>x</em> and <em>y</em> are <em>nearly</em> equal.</p>
+<p>This is useful when working with floating-point numbers, as these introduce small rounding errors.</p>
+<h2 id="examples">Examples</h2>
+<pre><code class="iex elixir">iex&gt; 2.3 - 0.3 == 2.0
+false
+iex&gt; 2.3 - 0.3 &lt;~&gt; 2.0
+true </code></pre>
 
   </section>
 </div>
@@ -396,7 +429,7 @@
     </div>
   
   <section class="docstring">
-    <p>Computes the arc cosine of x.</p>
+    <p>Computes the arc cosine of <em>x</em>. (expressed in radians)</p>
 
   </section>
 </div>
@@ -419,7 +452,7 @@
     </div>
   
   <section class="docstring">
-    <p>Computes the inverse hyperbolic cosine of x.</p>
+    <p>Computes the inverse hyperbolic cosine of <em>x</em>.</p>
 
   </section>
 </div>
@@ -442,7 +475,7 @@
     </div>
   
   <section class="docstring">
-    <p>Computes the arc sine of x.</p>
+    <p>Computes the arc sine of <em>x</em>. (expressed in radians)</p>
 
   </section>
 </div>
@@ -465,7 +498,7 @@
     </div>
   
   <section class="docstring">
-    <p>Computes the inverse hyperbolic sine of x.</p>
+    <p>Computes the inverse hyperbolic sine of <em>x</em>.</p>
 
   </section>
 </div>
@@ -488,7 +521,7 @@
     </div>
   
   <section class="docstring">
-    <p>Computes the arc tangent of x.</p>
+    <p>Computes the arc tangent of <em>x</em>. (expressed in radians)</p>
 
   </section>
 </div>
@@ -511,7 +544,7 @@
     </div>
   
   <section class="docstring">
-    <p>Computes the arc tangent given y and x.</p>
+    <p>Computes the arc tangent given <em>y</em> and <em>x</em>. (expressed in radians)</p>
 
   </section>
 </div>
@@ -534,7 +567,7 @@
     </div>
   
   <section class="docstring">
-    <p>Computes the inverse hyperbolic tangent of x.</p>
+    <p>Computes the inverse hyperbolic tangent of <em>x</em>.</p>
 
   </section>
 </div>
@@ -557,7 +590,8 @@
     </div>
   
   <section class="docstring">
-    <p>Computes the cosine of x.</p>
+    <p>Computes the cosine of <em>x</em>.</p>
+<p><em>x</em> is interpreted as a value in radians.</p>
 
   </section>
 </div>
@@ -580,7 +614,33 @@
     </div>
   
   <section class="docstring">
-    <p>Computes the hyperbolic cosine of x (expressed in radians).</p>
+    <p>Computes the hyperbolic cosine of <em>x</em> (expressed in radians).</p>
+
+  </section>
+</div>
+<div class="detail" id="deg2rad/1">
+  <div class="detail-header">
+    <a href="#deg2rad/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">deg2rad(x)</span>
+      
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">deg2rad(<a href="#t:x/0">x</a>) :: float</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Converts degrees to radians</p>
+<h2 id="examples">Examples</h2>
+<pre><code class="iex elixir">iex&gt;Math.deg2rad(180)
+3.141592653589793</code></pre>
 
   </section>
 </div>
@@ -603,7 +663,7 @@
     </div>
   
   <section class="docstring">
-    <p>The mathematical constant E (e).</p>
+    <p>The mathematical constant <em>ℯ</em> (e).</p>
 
   </section>
 </div>
@@ -626,7 +686,31 @@
     </div>
   
   <section class="docstring">
-    <p>Returns e to the xth power.</p>
+    <p>Returns ℯ to the xth power.</p>
+
+  </section>
+</div>
+<div class="detail" id="isqrt/1">
+  <div class="detail-header">
+    <a href="#isqrt/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">isqrt(x)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns the non-negative integer square root of <em>x</em> (rounded towards zero)</p>
+<p>Does not accept negative numbers as input.</p>
+<h2 id="examples">Examples</h2>
+<pre><code class="iex elixir">iex&gt; Math.isqrt(100)
+10
+iex&gt; Math.isqrt(16)
+4
+iex&gt; Math.isqrt(65536)
+256
+iex&gt; Math.isqrt(10)
+3</code></pre>
 
   </section>
 </div>
@@ -649,7 +733,8 @@
     </div>
   
   <section class="docstring">
-    <p>Returns the natural logarithm (base e) of x.</p>
+    <p>Returns the natural logarithm (base <code>ℯ</code>) of <em>x</em>.</p>
+<p>See also <a href="#e/0"><code>e/0</code></a>.</p>
 
   </section>
 </div>
@@ -672,7 +757,7 @@
     </div>
   
   <section class="docstring">
-    <p>Computes the logarithm (base 10) of x.</p>
+    <p>Computes the common logarithm (base <code>10</code>) of <em>x</em>.</p>
 
   </section>
 </div>
@@ -695,7 +780,7 @@
     </div>
   
   <section class="docstring">
-    <p>Returns the logarithm (base 2) of x.</p>
+    <p>Returns the binary logarithm (base <code>2</code>) of <em>x</em>.</p>
 
   </section>
 </div>
@@ -718,7 +803,8 @@
     </div>
   
   <section class="docstring">
-    <p>The mathematical constant PI.</p>
+    <p>The mathematical constant <em>π</em> (pi).</p>
+<p>The ratio of a circle's circumference to its diameter. The returned number is a floating-point approximation (as π is irrational)</p>
 
   </section>
 </div>
@@ -727,7 +813,7 @@
     <a href="#pow/2" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">pow(x, y)</span>
+    <span class="signature">pow(x, n)</span>
       
   </div>
   
@@ -735,13 +821,55 @@
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">pow(<a href="#t:x/0">x</a>, <a href="#t:y/0">y</a>) :: float</code></pre>
+          <pre><code class="elixir">pow(number, number) :: number</code></pre>
         
       </div>
     </div>
   
   <section class="docstring">
-    <p>Returns x to the yth power.</p>
+    <p>Arithmetic exponentiation. Returns <em>x</em> to the <em>n</em> -th power.</p>
+<p>When both <em>x</em> and <em>n</em> are integers and <em>n</em> is positive, returns an <code>integer</code>. When <em>n</em> is a negative integer, returns a <code>float</code>. When working with integers, the Exponentiation by Squaring algorithm is used, to allow for a fast and precise result.</p>
+<p>When one of the numbers is a float, returns a <code>float</code> by using erlang's <a href="http://www.erlang.org/doc/man/math.html#pow-2"><code>:math.pow/2</code></a> function.</p>
+<p>It is possible to calculate roots by choosing <em>n</em> between 0.0 and 1.0 (To calculate the <em>p</em> -th-root, pass 1/<em>p</em> to the function)</p>
+<h2 id="examples">Examples</h2>
+<pre><code class="iex elixir">iex&gt; Math.pow(2, 4)
+16
+iex&gt; Math.pow(2.0, 4)
+16.0
+iex&gt; Math.pow(2, 4.0)
+16.0
+iex&gt; Math.pow(5, 100)
+7888609052210118054117285652827862296732064351090230047702789306640625
+iex&gt; Math.pow(5.0, 100)
+7.888609052210118e69
+iex&gt; Math.pow(2, (1/2))
+1.4142135623730951</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="rad2deg/1">
+  <div class="detail-header">
+    <a href="#rad2deg/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">rad2deg(x)</span>
+      
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">rad2deg(<a href="#t:x/0">x</a>) :: float</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Converts radians to degrees</p>
+<h2 id="examples">Examples</h2>
+<pre><code class="iex elixir">iex&gt;Math.rad2deg(Math.pi)
+180.0</code></pre>
 
   </section>
 </div>
@@ -764,7 +892,8 @@
     </div>
   
   <section class="docstring">
-    <p>Computes the sine of x.</p>
+    <p>Computes the sine of <em>x</em>.</p>
+<p><em>x</em> is interpreted as a value in radians.</p>
 
   </section>
 </div>
@@ -787,7 +916,7 @@
     </div>
   
   <section class="docstring">
-    <p>Computes the hyperbolic sine of x (expressed in radians).</p>
+    <p>Computes the hyperbolic sine of <em>x</em> (expressed in radians).</p>
 
   </section>
 </div>
@@ -810,7 +939,7 @@
     </div>
   
   <section class="docstring">
-    <p>Returns the non-negative square root of x.</p>
+    <p>Returns the non-negative square root of <em>x</em>.</p>
 
   </section>
 </div>
@@ -833,7 +962,7 @@
     </div>
   
   <section class="docstring">
-    <p>Computes the tangent of x (expressed in radians).</p>
+    <p>Computes the tangent of <em>x</em> (expressed in radians).</p>
 
   </section>
 </div>
@@ -856,7 +985,7 @@
     </div>
   
   <section class="docstring">
-    <p>Computes the hyperbolic tangent of x (expressed in radians).</p>
+    <p>Computes the hyperbolic tangent of <em>x</em> (expressed in radians).</p>
 
   </section>
 </div>
@@ -879,7 +1008,8 @@
     </div>
   
   <section class="docstring">
-    <p>The mathematical constant TAU.</p>
+    <p>The mathematical constant <em>τ</em> (tau).</p>
+<p>The ratio of a circle's circumference to its radius. Defined as 2 * π, but preferred by some mathematicians. The returned number is a floating-point approximation (as τ is irrational)</p>
 
   </section>
 </div>
