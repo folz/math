@@ -75,7 +75,7 @@ defmodule Math do
   # General
 
   @doc """
-  Arithmetic exponentiation. Returns *x* to the *n* -th power.
+  Arithmetic exponentiation. Calculates *x* to the *n* -th power.
 
   When both *x* and *n* are integers and *n* is positive, returns an `integer`.
   When *n* is a negative integer, returns a `float`.
@@ -119,13 +119,13 @@ defmodule Math do
   defp _pow(x, n, y), do: _pow(x * x, div((n - 1), 2), x * y)
 
   @doc """
-  Returns the non-negative square root of *x*.
+  Calculates the non-negative square root of *x*.
   """
   @spec sqrt(x) :: float
   defdelegate sqrt(x), to: :math
 
   @doc """
-  Returns the non-negative nth-root of *x*.
+  Calculates the non-negative nth-root of *x*.
 
   ## Examples
 
@@ -139,7 +139,7 @@ defmodule Math do
   def nth_root(x, n), do: pow(x, 1 / n)
 
   @doc """
-  Returns the non-negative integer square root of *x* (rounded towards zero)
+  Calculates the non-negative integer square root of *x* (rounded towards zero)
 
   Does not accept negative numbers as input.
 
@@ -154,6 +154,7 @@ defmodule Math do
       iex> Math.isqrt(10)
       3
   """
+  @spec isqrt(integer) :: integer
   def isqrt(x)
 
   def isqrt(x) when x < 0, do: raise ArithmeticError
@@ -174,6 +175,8 @@ defmodule Math do
 
   This is the largest positive integer that divides both *a* and *b* without leaving a remainder.
 
+  Also see `Math.lcm/2`
+
   ## Examples
 
       iex> Math.gcd(2, 4)
@@ -184,16 +187,22 @@ defmodule Math do
       4
       iex> Math.gcd(54, 24)
       6
+      iex> Math.gcd(-54, 24)
+      6
   """  
+  @spec gcd(integer, integer) :: non_neg_integer
   def gcd(a, 0), do: abs(a)
   
   def gcd(0, b), do: abs(b)
+  def gcd(a, b) when a < 0 or b < 0, do: gcd(abs(a), abs(b))
   def gcd(a, b), do: gcd(b, rem(a,b))
 
   @doc """
   Calculates the Least Common Multiple of two numbers.
 
   This is the smallest positive integer that can be divided by both *a* by *b* without leaving a remainder.
+
+  Also see `Math.gcd/2`
 
   ## Examples
 
@@ -204,11 +213,12 @@ defmodule Math do
       iex> Math.lcm(21, 6)
       42
   """
+  @spec lcm(integer, integer) :: non_neg_integer
   def lcm(a, b)
 
   def lcm(0, 0), do: 0
   def lcm(a, b) do
-    Kernel.div(a * b, gcd(a, b))
+    abs(Kernel.div(a * b, gcd(a, b)))
   end
 
 
@@ -227,11 +237,12 @@ defmodule Math do
       iex> Math.factorial(20)
       2432902008176640000
   """
+  @spec factorial(non_neg_integer) :: pos_integer
   def factorial(n)
 
   def factorial(0), do: 1
 
-  for {n, fact} <- (1..@precompute_factorials_up_to |> Enum.scan({0,1}, fn n, {_prev_n, prev_fact} -> {n, n * prev_fact} end)) do
+  for {n, fact} <- (1..@precompute_factorials_up_to |> Enum.scan( {0, 1}, fn n, {_prev_n, prev_fact} -> {n, n * prev_fact} end)) do
     def factorial(unquote(n)), do: unquote(fact)
   end
 
@@ -240,13 +251,63 @@ defmodule Math do
   end
 
   @doc """
-  Returns ℯ to the xth power.
+  Calculates the k-permutations of *n*.
+
+  This is the number of distinct ways to create groups of size *k* from *n* distinct elements.
+  
+  Notice that *n* is the first parameter, for easier piping.
+
+  ## Examples
+
+      iex> Math.k_permutations(10, 2)
+      90
+      iex> Math.k_permutations(5, 5)
+      120
+      iex> Math.k_permutations(3, 4)
+      0
+
+  """
+  @spec k_permutations(non_neg_integer, non_neg_integer) :: non_neg_integer
+  def k_permutations(n, k)
+
+  def k_permutations(n, k) when k > n, do: 0
+
+  def k_permutations(n, k) do
+    div(factorial(n), factorial(n - k))
+  end
+
+
+  @doc """
+  Calculates the k-combinations of *n*. 
+
+  ## Examples
+      iex> Math.k_combinations(10, 2)
+      45
+      iex> Math.k_combinations(5, 5)
+      1
+      iex> Math.k_combinations(3, 4)
+      0
+  """
+  @spec k_combinations(non_neg_integer, non_neg_integer) :: non_neg_integer
+  def k_combinations(n, k)
+
+  def k_combinations(n, k) when k > n, do: 0
+
+  def k_combinations(n, k) do
+    div(factorial(n), factorial(k) * factorial(n - k))
+  end
+
+
+  # Logarithms and exponentiation
+
+  @doc """
+  Calculates ℯ to the xth power.
   """
   @spec exp(x) :: float
   defdelegate exp(x), to: :math
 
   @doc """
-  Returns the natural logarithm (base `ℯ`) of *x*.
+  Calculates the natural logarithm (base `ℯ`) of *x*.
 
   See also `Math.e/0`.
   """
@@ -254,7 +315,7 @@ defmodule Math do
   defdelegate log(x), to: :math
 
   @doc """
-  Returns the base-*b* logarithm of *x*
+  Calculates the base-*b* logarithm of *x*
 
   Note that variants for the most common logarithms exist that are faster and more precise.
 
@@ -280,7 +341,7 @@ defmodule Math do
   end
 
   @doc """
-  Returns the binary logarithm (base `2`) of *x*.
+  Calculates the binary logarithm (base `2`) of *x*.
 
   See also `Math.log/2`.
   """
@@ -288,7 +349,7 @@ defmodule Math do
   defdelegate log2(x), to: :math
 
   @doc """
-  Computes the common logarithm (base `10`) of *x*.
+  Calculates the common logarithm (base `10`) of *x*.
 
   See also `Math.log/2`.
   """
@@ -366,6 +427,8 @@ defmodule Math do
 
   @doc """
   Computes the arc tangent given *y* and *x*. (expressed in radians)
+
+  This variant returns the inverse tangent in the correct quadrant, as the signs of both *x* and *y* are known.
   """
   @spec atan2(y, x) :: float
   defdelegate atan2(y, x), to: :math

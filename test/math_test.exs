@@ -2,6 +2,7 @@ defmodule MathTest do
   use ExUnit.Case, async: true
   import Math
   doctest Math
+  doctest Math.Enum
 
   test "nearly equal" do
     assert 0 <~> 0 == true
@@ -43,6 +44,11 @@ defmodule MathTest do
   test "acos" do
     assert acos(0) <~> pi/2
     assert acos(1) <~> 0
+    assert acos(-1) <~> pi
+
+    # The following are outside the domain of the inverse cosine
+    assert_raise(ArithmeticError, fn -> acos(-1.1) end)
+    assert_raise(ArithmeticError, fn -> acos(1.1) end)
   end
 
   test "atan" do
@@ -60,12 +66,20 @@ defmodule MathTest do
     assert sinh(0) <~> 0
     assert sinh(log(2)) <~> 3/4
     assert sinh(log(8)) <~> 63/16
+
+    for x <- 0..20 do 
+      assert sinh(x) <~> (exp(x) - exp(-x)) / 2
+    end
   end
 
   test "cosh" do
     assert cosh(0) <~> 1
     assert cosh(log(2)) <~> 5/4
     assert cosh(log(8)) <~> 65/16
+
+    for x <- 0..20 do 
+      assert cosh(x) <~> (exp(x) + exp(-x)) / 2
+    end
   end
 
   test "tanh" do
@@ -76,17 +90,18 @@ defmodule MathTest do
 
   test "asinh" do
     assert asinh(0) <~> 0
-    # not even going to pretend I know what else asinh should do
   end
 
   test "acosh" do
     assert acosh(1) <~> 0
-    # not even going to pretend I know what else acosh should do
   end
 
   test "atanh" do
     assert atanh(0) <~> 0
-    # not even going to pretend I know what else atanh should do
+
+    # The following are outside the domain of the inverse arctangent
+    assert_raise(ArithmeticError, fn -> atanh(1)  end)
+    assert_raise(ArithmeticError, fn -> atanh(-1) end)
   end
 
   test "exp" do
