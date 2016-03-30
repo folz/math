@@ -1,4 +1,6 @@
 defmodule Math do
+  @vsn "0.2.0"
+
   @moduledoc """
   Mathematical functions and constants.
   """

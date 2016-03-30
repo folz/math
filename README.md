@@ -40,6 +40,7 @@ The Math module adds many useful functions that extend Elixir's standard library
   - `Math.asinh(x)` The inverse hyperbolic sine of *x*.
   - `Math.acosh(x)` The inverse hyperbolic cosine of *x*.
   - `Math.atanh(x)` The inverse hyperbolic tangent of *x*.
+  
 - Working with Collections
   - `Math.Enum.product(collection)` The result of multiplying all elements in the passed collection.
   - `Math.Enum.mean(collection)` the mean of the numbers in the collection.
