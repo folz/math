@@ -211,22 +211,31 @@ defmodule Math do
     Kernel.div(a * b, gcd(a, b))
   end
 
+
+  @precompute_factorials_up_to 1000
   @doc """
   Calculates the factorial of *n*: 1 * 2 * 3 * ... * *n*
 
-  To make this function faster, a values up to 100 are precomputed at compile time.
+  To make this function faster, values of *n* up to `#{@precompute_factorials_up_to}` are precomputed at compile time.
+
+  ## Examples
+
+      iex> Math.factorial(1)
+      1
+      iex> Math.factorial(5)
+      120
+      iex> Math.factorial(20)
+      2432902008176640000
   """
   def factorial(n)
 
   def factorial(0), do: 1
 
-  fact_n = 1
-  for n <- 1..100 do
-    fact_n = n * fact_n
-    def factorial(unquote(n)), do: unquote(fact_n)
+  for {n, fact} <- (1..@precompute_factorials_up_to |> Enum.scan({0,1}, fn n, {_prev_n, prev_fact} -> {n, n * prev_fact} end)) do
+    def factorial(unquote(n)), do: unquote(fact)
   end
 
-  def factorial(n) do
+  def factorial(n) when n >= 0 do
     n * factorial(n-1)
   end
 
