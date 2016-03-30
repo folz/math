@@ -212,6 +212,25 @@ defmodule Math do
   end
 
   @doc """
+  Calculates the factorial of *n*: 1 * 2 * 3 * ... * *n*
+
+  To make this function faster, a values up to 100 are precomputed at compile time.
+  """
+  def factorial(n)
+
+  def factorial(0), do: 1
+
+  fact_n = 1
+  for n <- 1..100 do
+    fact_n = n * fact_n
+    def factorial(unquote(n)), do: unquote(fact_n)
+  end
+
+  def factorial(n) do
+    n * factorial(n-1)
+  end
+
+  @doc """
   Returns ℯ to the xth power.
   """
   @spec exp(x) :: float
@@ -266,7 +285,6 @@ defmodule Math do
   """
   @spec log10(x) :: float
   defdelegate log10(x), to: :math
-
 
   # Trigonometry
 
