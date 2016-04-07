@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.4">
-    <title>Math – math v0.1.0</title>
+    <title>Math – math v0.2.0</title>
     <link rel="stylesheet" href="dist/app-1e374caa3d.css" />
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -27,7 +27,7 @@
         math
       </h1>
       <h2 class="sidebar-projectVersion">
-        v0.1.0
+        v0.2.0
       </h2>
     </div>
     
@@ -59,7 +59,7 @@
 
 
       <h1>
-        <small class="visible-xs">math v0.1.0</small>
+        <small class="visible-xs">math v0.2.0</small>
         Math
         
         
@@ -219,7 +219,25 @@
     <a href="#exp/1">exp(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns ℯ to the xth power</p>
+    <div class="summary-synopsis"><p>Calculates ℯ to the xth power</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#factorial/1">factorial(n)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Calculates the factorial of <em>n</em>: 1 * 2 * 3 * ... * <em>n</em></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#gcd/2">gcd(a, b)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Calculates the Greatest Common divisor of two numbers</p>
 </div>
   
 </div>
@@ -228,7 +246,34 @@
     <a href="#isqrt/1">isqrt(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns the non-negative integer square root of <em>x</em> (rounded towards zero)</p>
+    <div class="summary-synopsis"><p>Calculates the non-negative integer square root of <em>x</em> (rounded towards zero)</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#k_combinations/2">k_combinations(n, k)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Calculates the k-combinations of <em>n</em></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#k_permutations/2">k_permutations(n, k)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Calculates the k-permutations of <em>n</em></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#lcm/2">lcm(a, b)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Calculates the Least Common Multiple of two numbers</p>
 </div>
   
 </div>
@@ -237,7 +282,16 @@
     <a href="#log/1">log(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns the natural logarithm (base <code>ℯ</code>) of <em>x</em></p>
+    <div class="summary-synopsis"><p>Calculates the natural logarithm (base <code>ℯ</code>) of <em>x</em></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#log/2">log(x, x)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Calculates the base-<em>b</em> logarithm of <em>x</em></p>
 </div>
   
 </div>
@@ -246,7 +300,7 @@
     <a href="#log10/1">log10(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Computes the common logarithm (base <code>10</code>) of <em>x</em></p>
+    <div class="summary-synopsis"><p>Calculates the common logarithm (base <code>10</code>) of <em>x</em></p>
 </div>
   
 </div>
@@ -255,7 +309,16 @@
     <a href="#log2/1">log2(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns the binary logarithm (base <code>2</code>) of <em>x</em></p>
+    <div class="summary-synopsis"><p>Calculates the binary logarithm (base <code>2</code>) of <em>x</em></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#nth_root/2">nth_root(x, n)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Calculates the non-negative nth-root of <em>x</em></p>
 </div>
   
 </div>
@@ -273,7 +336,7 @@
     <a href="#pow/2">pow(x, n)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Arithmetic exponentiation. Returns <em>x</em> to the <em>n</em> -th power</p>
+    <div class="summary-synopsis"><p>Arithmetic exponentiation. Calculates <em>x</em> to the <em>n</em> -th power</p>
 </div>
   
 </div>
@@ -309,7 +372,7 @@
     <a href="#sqrt/1">sqrt(x)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns the non-negative square root of <em>x</em></p>
+    <div class="summary-synopsis"><p>Calculates the non-negative square root of <em>x</em></p>
 </div>
   
 </div>
@@ -545,6 +608,7 @@ true </code></pre>
   
   <section class="docstring">
     <p>Computes the arc tangent given <em>y</em> and <em>x</em>. (expressed in radians)</p>
+<p>This variant returns the inverse tangent in the correct quadrant, as the signs of both <em>x</em> and <em>y</em> are known.</p>
 
   </section>
 </div>
@@ -686,7 +750,74 @@ true </code></pre>
     </div>
   
   <section class="docstring">
-    <p>Returns ℯ to the xth power.</p>
+    <p>Calculates ℯ to the xth power.</p>
+
+  </section>
+</div>
+<div class="detail" id="factorial/1">
+  <div class="detail-header">
+    <a href="#factorial/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">factorial(n)</span>
+      
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">factorial(non_neg_integer) :: pos_integer</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Calculates the factorial of <em>n</em>: 1 * 2 * 3 * ... * <em>n</em></p>
+<p>To make this function faster, values of <em>n</em> up to <code>1000</code> are precomputed at compile time.</p>
+<h2 id="examples">Examples</h2>
+<pre><code class="iex elixir">iex&gt; Math.factorial(1)
+1
+iex&gt; Math.factorial(5)
+120
+iex&gt; Math.factorial(20)
+2432902008176640000</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="gcd/2">
+  <div class="detail-header">
+    <a href="#gcd/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">gcd(a, b)</span>
+      
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">gcd(integer, integer) :: non_neg_integer</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Calculates the Greatest Common divisor of two numbers.</p>
+<p>This is the largest positive integer that divides both <em>a</em> and <em>b</em> without leaving a remainder.</p>
+<p>Also see <a href="Math.html#lcm/2"><code>Math.lcm/2</code></a></p>
+<h2 id="examples">Examples</h2>
+<pre><code class="iex elixir">iex&gt; Math.gcd(2, 4)
+2
+iex&gt; Math.gcd(2, 3)
+1
+iex&gt; Math.gcd(12, 8)
+4
+iex&gt; Math.gcd(54, 24)
+6
+iex&gt; Math.gcd(-54, 24)
+6</code></pre>
 
   </section>
 </div>
@@ -699,8 +830,17 @@ true </code></pre>
       
   </div>
   
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">isqrt(integer) :: integer</code></pre>
+        
+      </div>
+    </div>
+  
   <section class="docstring">
-    <p>Returns the non-negative integer square root of <em>x</em> (rounded towards zero)</p>
+    <p>Calculates the non-negative integer square root of <em>x</em> (rounded towards zero)</p>
 <p>Does not accept negative numbers as input.</p>
 <h2 id="examples">Examples</h2>
 <pre><code class="iex elixir">iex&gt; Math.isqrt(100)
@@ -711,6 +851,100 @@ iex&gt; Math.isqrt(65536)
 256
 iex&gt; Math.isqrt(10)
 3</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="k_combinations/2">
+  <div class="detail-header">
+    <a href="#k_combinations/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">k_combinations(n, k)</span>
+      
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">k_combinations(non_neg_integer, non_neg_integer) :: non_neg_integer</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Calculates the k-combinations of <em>n</em>.</p>
+<h2 id="examples">Examples</h2>
+<pre><code class="iex elixir">iex&gt; Math.k_combinations(10, 2)
+45
+iex&gt; Math.k_combinations(5, 5)
+1
+iex&gt; Math.k_combinations(3, 4)
+0</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="k_permutations/2">
+  <div class="detail-header">
+    <a href="#k_permutations/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">k_permutations(n, k)</span>
+      
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">k_permutations(non_neg_integer, non_neg_integer) :: non_neg_integer</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Calculates the k-permutations of <em>n</em>.</p>
+<p>This is the number of distinct ways to create groups of size <em>k</em> from <em>n</em> distinct elements.</p>
+<p>Notice that <em>n</em> is the first parameter, for easier piping.</p>
+<h2 id="examples">Examples</h2>
+<pre><code class="iex elixir">iex&gt; Math.k_permutations(10, 2)
+90
+iex&gt; Math.k_permutations(5, 5)
+120
+iex&gt; Math.k_permutations(3, 4)
+0</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="lcm/2">
+  <div class="detail-header">
+    <a href="#lcm/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">lcm(a, b)</span>
+      
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">lcm(integer, integer) :: non_neg_integer</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Calculates the Least Common Multiple of two numbers.</p>
+<p>This is the smallest positive integer that can be divided by both <em>a</em> by <em>b</em> without leaving a remainder.</p>
+<p>Also see <a href="Math.html#gcd/2"><code>Math.gcd/2</code></a></p>
+<h2 id="examples">Examples</h2>
+<pre><code class="iex elixir">iex&gt; Math.lcm(4, 6)
+12
+iex&gt; Math.lcm(3, 7)
+21
+iex&gt; Math.lcm(21, 6)
+42</code></pre>
 
   </section>
 </div>
@@ -733,8 +967,44 @@ iex&gt; Math.isqrt(10)
     </div>
   
   <section class="docstring">
-    <p>Returns the natural logarithm (base <code>ℯ</code>) of <em>x</em>.</p>
-<p>See also <a href="#e/0"><code>e/0</code></a>.</p>
+    <p>Calculates the natural logarithm (base <code>ℯ</code>) of <em>x</em>.</p>
+<p>See also <a href="Math.html#e/0"><code>Math.e/0</code></a>.</p>
+
+  </section>
+</div>
+<div class="detail" id="log/2">
+  <div class="detail-header">
+    <a href="#log/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">log(x, x)</span>
+      
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">log(<a href="#t:x/0">x</a>, number) :: float</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Calculates the base-<em>b</em> logarithm of <em>x</em></p>
+<p>Note that variants for the most common logarithms exist that are faster and more precise.</p>
+<p>See also <a href="Math.html#log/1"><code>Math.log/1</code></a>, <code>Math.log2/1</code> and <code>Math.log10/1</code>.</p>
+<h2 id="examples">Examples</h2>
+<pre><code class="iex elixir">iex&gt; Math.log(5, 5)
+1.0
+iex&gt; Math.log(20, 2) &lt;~&gt; Math.log2(20) 
+true
+iex&gt; Math.log(20, 10) &lt;~&gt; Math.log10(20)
+true
+iex&gt; Math.log(2, 4)
+0.5
+iex&gt; Math.log(10, 4)
+1.6609640474436813</code></pre>
 
   </section>
 </div>
@@ -757,7 +1027,8 @@ iex&gt; Math.isqrt(10)
     </div>
   
   <section class="docstring">
-    <p>Computes the common logarithm (base <code>10</code>) of <em>x</em>.</p>
+    <p>Calculates the common logarithm (base <code>10</code>) of <em>x</em>.</p>
+<p>See also <a href="Math.html#log/2"><code>Math.log/2</code></a>.</p>
 
   </section>
 </div>
@@ -780,7 +1051,36 @@ iex&gt; Math.isqrt(10)
     </div>
   
   <section class="docstring">
-    <p>Returns the binary logarithm (base <code>2</code>) of <em>x</em>.</p>
+    <p>Calculates the binary logarithm (base <code>2</code>) of <em>x</em>.</p>
+<p>See also <a href="Math.html#log/2"><code>Math.log/2</code></a>.</p>
+
+  </section>
+</div>
+<div class="detail" id="nth_root/2">
+  <div class="detail-header">
+    <a href="#nth_root/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">nth_root(x, n)</span>
+      
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">nth_root(<a href="#t:x/0">x</a>, number) :: float</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Calculates the non-negative nth-root of <em>x</em>.</p>
+<h2 id="examples">Examples</h2>
+<pre><code class="iex elixir">iex&gt; Math.nth_root(27, 3)
+3.0
+iex&gt; Math.nth_root(65536, 8)
+4.0</code></pre>
 
   </section>
 </div>
@@ -827,7 +1127,7 @@ iex&gt; Math.isqrt(10)
     </div>
   
   <section class="docstring">
-    <p>Arithmetic exponentiation. Returns <em>x</em> to the <em>n</em> -th power.</p>
+    <p>Arithmetic exponentiation. Calculates <em>x</em> to the <em>n</em> -th power.</p>
 <p>When both <em>x</em> and <em>n</em> are integers and <em>n</em> is positive, returns an <code>integer</code>. When <em>n</em> is a negative integer, returns a <code>float</code>. When working with integers, the Exponentiation by Squaring algorithm is used, to allow for a fast and precise result.</p>
 <p>When one of the numbers is a float, returns a <code>float</code> by using erlang's <a href="http://www.erlang.org/doc/man/math.html#pow-2"><code>:math.pow/2</code></a> function.</p>
 <p>It is possible to calculate roots by choosing <em>n</em> between 0.0 and 1.0 (To calculate the <em>p</em> -th-root, pass 1/<em>p</em> to the function)</p>
@@ -842,7 +1142,7 @@ iex&gt; Math.pow(5, 100)
 7888609052210118054117285652827862296732064351090230047702789306640625
 iex&gt; Math.pow(5.0, 100)
 7.888609052210118e69
-iex&gt; Math.pow(2, (1/2))
+iex&gt; Math.pow(2, (1 / 2))
 1.4142135623730951</code></pre>
 
   </section>
@@ -939,7 +1239,7 @@ iex&gt; Math.pow(2, (1/2))
     </div>
   
   <section class="docstring">
-    <p>Returns the non-negative square root of <em>x</em>.</p>
+    <p>Calculates the non-negative square root of <em>x</em>.</p>
 
   </section>
 </div>
