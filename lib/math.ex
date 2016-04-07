@@ -1,4 +1,6 @@
 defmodule Math do
+  @vsn "0.2.0"
+
   @moduledoc """
   Mathematical functions and constants.
   """
@@ -72,8 +74,10 @@ defmodule Math do
     end
   end
 
+  # General
+
   @doc """
-  Arithmetic exponentiation. Returns *x* to the *n* -th power.
+  Arithmetic exponentiation. Calculates *x* to the *n* -th power.
 
   When both *x* and *n* are integers and *n* is positive, returns an `integer`.
   When *n* is a negative integer, returns a `float`.
@@ -95,7 +99,7 @@ defmodule Math do
       7888609052210118054117285652827862296732064351090230047702789306640625
       iex> Math.pow(5.0, 100)
       7.888609052210118e69
-      iex> Math.pow(2, (1/2))
+      iex> Math.pow(2, (1 / 2))
       1.4142135623730951
   """
   @spec pow(number, number) :: number
@@ -117,6 +121,246 @@ defmodule Math do
   defp _pow(x, n, y), do: _pow(x * x, div((n - 1), 2), x * y)
 
   @doc """
+  Calculates the non-negative square root of *x*.
+  """
+  @spec sqrt(x) :: float
+  defdelegate sqrt(x), to: :math
+
+  @doc """
+  Calculates the non-negative nth-root of *x*.
+
+  ## Examples
+
+      iex> Math.nth_root(27, 3)
+      3.0
+      iex> Math.nth_root(65536, 8)
+      4.0
+  """
+  @spec nth_root(x, number) :: float
+  def nth_root(x, n)
+  def nth_root(x, n), do: pow(x, 1 / n)
+
+  @doc """
+  Calculates the non-negative integer square root of *x* (rounded towards zero)
+
+  Does not accept negative numbers as input.
+
+  ## Examples
+
+      iex> Math.isqrt(100)
+      10
+      iex> Math.isqrt(16)
+      4
+      iex> Math.isqrt(65536)
+      256
+      iex> Math.isqrt(10)
+      3
+  """
+  @spec isqrt(integer) :: integer
+  def isqrt(x)
+
+  def isqrt(x) when x < 0, do: raise ArithmeticError
+
+  def isqrt(x), do: _isqrt(x, 1, div((1 + x), 2))
+    
+  defp _isqrt(x, m, n) when abs(m - n) <= 1 and n * n <= x, do: n
+  defp _isqrt(_x, m, n) when abs(m - n) <= 1, do: n - 1
+
+  defp _isqrt(x, _, n) do
+    _isqrt(x, n, div(n + div(x, n), 2))
+  end
+
+
+  # 
+  @doc """
+  Calculates the Greatest Common divisor of two numbers.
+
+  This is the largest positive integer that divides both *a* and *b* without leaving a remainder.
+
+  Also see `Math.lcm/2`
+
+  ## Examples
+
+      iex> Math.gcd(2, 4)
+      2
+      iex> Math.gcd(2, 3)
+      1
+      iex> Math.gcd(12, 8)
+      4
+      iex> Math.gcd(54, 24)
+      6
+      iex> Math.gcd(-54, 24)
+      6
+  """  
+  @spec gcd(integer, integer) :: non_neg_integer
+  def gcd(a, 0), do: abs(a)
+  
+  def gcd(0, b), do: abs(b)
+  def gcd(a, b) when a < 0 or b < 0, do: gcd(abs(a), abs(b))
+  def gcd(a, b), do: gcd(b, rem(a,b))
+
+  @doc """
+  Calculates the Least Common Multiple of two numbers.
+
+  This is the smallest positive integer that can be divided by both *a* by *b* without leaving a remainder.
+
+  Also see `Math.gcd/2`
+
+  ## Examples
+
+      iex> Math.lcm(4, 6)
+      12
+      iex> Math.lcm(3, 7)
+      21
+      iex> Math.lcm(21, 6)
+      42
+  """
+  @spec lcm(integer, integer) :: non_neg_integer
+  def lcm(a, b)
+
+  def lcm(0, 0), do: 0
+  def lcm(a, b) do
+    abs(Kernel.div(a * b, gcd(a, b)))
+  end
+
+
+  @precompute_factorials_up_to 1000
+  @doc """
+  Calculates the factorial of *n*: 1 * 2 * 3 * ... * *n*
+
+  To make this function faster, values of *n* up to `#{@precompute_factorials_up_to}` are precomputed at compile time.
+
+  ## Examples
+
+      iex> Math.factorial(1)
+      1
+      iex> Math.factorial(5)
+      120
+      iex> Math.factorial(20)
+      2432902008176640000
+  """
+  @spec factorial(non_neg_integer) :: pos_integer
+  def factorial(n)
+
+  def factorial(0), do: 1
+
+  for {n, fact} <- (1..@precompute_factorials_up_to |> Enum.scan( {0, 1}, fn n, {_prev_n, prev_fact} -> {n, n * prev_fact} end)) do
+    def factorial(unquote(n)), do: unquote(fact)
+  end
+
+  def factorial(n) when n >= 0 do
+    n * factorial(n-1)
+  end
+
+  @doc """
+  Calculates the k-permutations of *n*.
+
+  This is the number of distinct ways to create groups of size *k* from *n* distinct elements.
+  
+  Notice that *n* is the first parameter, for easier piping.
+
+  ## Examples
+
+      iex> Math.k_permutations(10, 2)
+      90
+      iex> Math.k_permutations(5, 5)
+      120
+      iex> Math.k_permutations(3, 4)
+      0
+
+  """
+  @spec k_permutations(non_neg_integer, non_neg_integer) :: non_neg_integer
+  def k_permutations(n, k)
+
+  def k_permutations(n, k) when k > n, do: 0
+
+  def k_permutations(n, k) do
+    div(factorial(n), factorial(n - k))
+  end
+
+
+  @doc """
+  Calculates the k-combinations of *n*. 
+
+  ## Examples
+      iex> Math.k_combinations(10, 2)
+      45
+      iex> Math.k_combinations(5, 5)
+      1
+      iex> Math.k_combinations(3, 4)
+      0
+  """
+  @spec k_combinations(non_neg_integer, non_neg_integer) :: non_neg_integer
+  def k_combinations(n, k)
+
+  def k_combinations(n, k) when k > n, do: 0
+
+  def k_combinations(n, k) do
+    div(factorial(n), factorial(k) * factorial(n - k))
+  end
+
+
+  # Logarithms and exponentiation
+
+  @doc """
+  Calculates ℯ to the xth power.
+  """
+  @spec exp(x) :: float
+  defdelegate exp(x), to: :math
+
+  @doc """
+  Calculates the natural logarithm (base `ℯ`) of *x*.
+
+  See also `Math.e/0`.
+  """
+  @spec log(x) :: float
+  defdelegate log(x), to: :math
+
+  @doc """
+  Calculates the base-*b* logarithm of *x*
+
+  Note that variants for the most common logarithms exist that are faster and more precise.
+
+  See also `Math.log/1`, `Math.log2/1` and `Math.log10/1`.
+
+  ## Examples
+
+      iex> Math.log(5, 5)
+      1.0
+      iex> Math.log(20, 2) <~> Math.log2(20) 
+      true
+      iex> Math.log(20, 10) <~> Math.log10(20)
+      true
+      iex> Math.log(2, 4)
+      0.5
+      iex> Math.log(10, 4)
+      1.6609640474436813
+  """
+  @spec log(x, number) :: float
+  def log(x, x), do: 1.0
+  def log(x, b) do
+    :math.log(x) / :math.log(b)
+  end
+
+  @doc """
+  Calculates the binary logarithm (base `2`) of *x*.
+
+  See also `Math.log/2`.
+  """
+  @spec log2(x) :: float
+  defdelegate log2(x), to: :math
+
+  @doc """
+  Calculates the common logarithm (base `10`) of *x*.
+
+  See also `Math.log/2`.
+  """
+  @spec log10(x) :: float
+  defdelegate log10(x), to: :math
+
+  # Trigonometry
+
+  @doc """
   Converts degrees to radians
 
   ## Examples
@@ -129,7 +373,6 @@ defmodule Math do
   def deg2rad(x) do
     x / @rad_in_deg
   end
-
 
   @doc """
   Converts radians to degrees
@@ -186,9 +429,13 @@ defmodule Math do
 
   @doc """
   Computes the arc tangent given *y* and *x*. (expressed in radians)
+
+  This variant returns the inverse tangent in the correct quadrant, as the signs of both *x* and *y* are known.
   """
   @spec atan2(y, x) :: float
   defdelegate atan2(y, x), to: :math
+
+  # Advanced Trigonometry
 
   @doc """
   Computes the hyperbolic sine of *x* (expressed in radians).
@@ -225,66 +472,5 @@ defmodule Math do
   """
   @spec atanh(x) :: float
   defdelegate atanh(x), to: :math
-
-  @doc """
-  Returns ℯ to the xth power.
-  """
-  @spec exp(x) :: float
-  defdelegate exp(x), to: :math
-
-  @doc """
-  Returns the natural logarithm (base `ℯ`) of *x*.
-
-  See also `e/0`.
-  """
-  @spec log(x) :: float
-  defdelegate log(x), to: :math
-
-  @doc """
-  Returns the binary logarithm (base `2`) of *x*.
-  """
-  @spec log2(x) :: float
-  defdelegate log2(x), to: :math
-
-  @doc """
-  Computes the common logarithm (base `10`) of *x*.
-  """
-  @spec log10(x) :: float
-  defdelegate log10(x), to: :math
-
-  @doc """
-  Returns the non-negative square root of *x*.
-  """
-  @spec sqrt(x) :: float
-  defdelegate sqrt(x), to: :math
-
-  @doc """
-  Returns the non-negative integer square root of *x* (rounded towards zero)
-
-  Does not accept negative numbers as input.
-
-  ## Examples
-
-      iex> Math.isqrt(100)
-      10
-      iex> Math.isqrt(16)
-      4
-      iex> Math.isqrt(65536)
-      256
-      iex> Math.isqrt(10)
-      3
-  """
-  def isqrt(x)
-
-  def isqrt(x) when x < 0, do: raise ArithmeticError
-
-  def isqrt(x), do: _isqrt(x, 1, div((1 + x), 2))
-    
-  defp _isqrt(x, m, n) when abs(m - n) <= 1 and n * n <= x, do: n
-  defp _isqrt(_x, m, n) when abs(m - n) <= 1, do: n - 1
-
-  defp _isqrt(x, _, n) do
-    _isqrt(x, n, div(n + div(x, n), 2))
-  end
 
 end
