@@ -40,7 +40,7 @@ The Math module adds many useful functions that extend Elixir's standard library
   - `Math.asinh(x)` The inverse hyperbolic sine of *x*.
   - `Math.acosh(x)` The inverse hyperbolic cosine of *x*.
   - `Math.atanh(x)` The inverse hyperbolic tangent of *x*.
-  
+
 - Working with Collections
   - `Math.Enum.product(collection)` The result of multiplying all elements in the passed collection.
   - `Math.Enum.mean(collection)` the mean of the numbers in the collection.
@@ -54,14 +54,14 @@ Math is [available in Hex](https://hex.pm/packages/math). The package can be ins
 
         def deps do
           [
-            {:math, "~> 0.1.0"}
+            {:math, "~> 0.3.0"}
           ]
         end
 
   2. Require or import the Math library anywhere in your code you'd like:
 
         require Math
-    
+
   or
 
         import Math
@@ -69,6 +69,7 @@ Math is [available in Hex](https://hex.pm/packages/math). The package can be ins
   (Importing allows usage of the `<~>` operator)
 
 ## Changelog
+- 0.3.0 Fixed incorrect median for lists with even number of items. Updated tests.
 - 0.2.0 Added `factorial/1`, `nth_sqrt/2`, `k_permutations/2`, `k_combinations/2`, `gcd/2`, `lcm/2` and `Math.Enum` functions. Improved documentation.
 - 0.1.0 Added integer variant of `pow/1`, `isqrt/2`, `deg2rad/1`, `rad2deg/1`. Improved documentation.
 - 0.0.1 First implementation, mostly a wrapper around Erlang's `:math` library.

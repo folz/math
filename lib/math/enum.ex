@@ -24,14 +24,14 @@ defmodule Math.Enum do
   end
 
   @doc """
-  Calculates the mean of a collection of numbers. 
+  Calculates the mean of a collection of numbers.
 
   This is the sum, divided by the amount of elements in the collection.
 
   If the collection is empty, returns `nil`
 
   Also see `Math.Enum.median/1`
-  
+
   ## Examples
       iex> Math.Enum.mean [1,2,3]
       2.0
@@ -46,7 +46,7 @@ defmodule Math.Enum do
   def mean(collection)
 
   def mean(collection) do
-    count = Enum.count(collection) 
+    count = Enum.count(collection)
     case count do
       0 -> nil
       _ -> Enum.sum(collection) / count
@@ -68,9 +68,11 @@ defmodule Math.Enum do
       iex> Math.Enum.median [1,2,3]
       2
       iex> Math.Enum.median 1..10
-      6.5
+      5.5
       iex> Math.Enum.median [1,2,3,4,5, -100]
-      3.5
+      2.5
+      iex> Math.Enum.median [1,2]
+      1.5
       iex> Math.Enum.median []
       nil
   """
@@ -78,17 +80,17 @@ defmodule Math.Enum do
   def median(collection)
 
   def median(collection) do
-    count = Enum.count(collection) 
+    count = Enum.count(collection)
     cond do
       count == 0 -> nil
       rem(count, 2) == 1 -> # Middle element exists
         Enum.sort(collection) |> Enum.at(div(count, 2))
       true ->
-        # Take two middle-most elements. 
+        # Take two middle-most elements.
         sorted_collection = Enum.sort(collection)
         [
-          Enum.at(sorted_collection, div(count, 2)), 
-          Enum.at(sorted_collection, div(count, 2) + 1)
+          Enum.at(sorted_collection, div(count, 2)),
+          Enum.at(sorted_collection, div(count, 2) - 1)
         ]
         |> Math.Enum.mean
     end
