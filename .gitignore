@@ -3,6 +3,7 @@
 /deps
 erl_crash.dump
 *.ez
+doc
 
 # IDE files
 .idea
