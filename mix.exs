@@ -5,9 +5,9 @@ defmodule Math.Mixfile do
     [app: :math,
      version: "0.3.0",
      elixir: "~> 1.2",
-     description: description,
-     package: package,
-     deps: deps,
+     description: description(),
+     package: package(),
+     deps: deps(),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod]
   end
