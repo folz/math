@@ -7,3 +7,4 @@ doc
 
 # IDE files
 .idea
+.elixir_ls

@@ -66,6 +66,7 @@ defmodule Math.Mixfile do
       • Math.Enum.product(collection) The result of multiplying all elements in the passed collection.
       • Math.Enum.mean(collection) the mean of the numbers in the collection.
       • Math.Enum.median(collection) the median of the numbers in the collection.
+      • Math.Enum.mode(collection) the mode of the numbers in the collection.
 
     """
   end

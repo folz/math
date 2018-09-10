@@ -42,11 +42,12 @@ defmodule Math.Enum do
       iex> Math.Enum.mean []
       nil
   """
-  @spec mean(Enum.t) :: number
+  @spec mean(Enum.t()) :: number
   def mean(collection)
 
   def mean(collection) do
     count = Enum.count(collection)
+
     case count do
       0 -> nil
       _ -> Enum.sum(collection) / count
@@ -76,23 +77,88 @@ defmodule Math.Enum do
       iex> Math.Enum.median []
       nil
   """
-  @spec median(Enum.t) :: number | nil
+  @spec median(Enum.t()) :: number | nil
   def median(collection)
 
   def median(collection) do
     count = Enum.count(collection)
+
     cond do
-      count == 0 -> nil
-      rem(count, 2) == 1 -> # Middle element exists
+      count == 0 ->
+        nil
+
+      # Middle element exists
+      rem(count, 2) == 1 ->
         Enum.sort(collection) |> Enum.at(div(count, 2))
+
       true ->
         # Take two middle-most elements.
         sorted_collection = Enum.sort(collection)
+
         [
           Enum.at(sorted_collection, div(count, 2)),
           Enum.at(sorted_collection, div(count, 2) - 1)
         ]
-        |> Math.Enum.mean
+        |> Math.Enum.mean()
+    end
+  end
+
+  @doc """
+  Find the mode of a given collection of numbers.
+
+  - The Mode is the most frequently occuring value.
+  - If no number in the list is repeated, then there is no mode for the list.
+
+  If the collection is empty or there is no Mode, then it will returns `nil`
+
+  ## Examples
+
+      iex> Math.Enum.mode [1,2,3]
+      nil
+      iex> Math.Enum.mode 1..10
+      nil
+      iex> Math.Enum.mode [1,2,3,4,5, -100, -100]
+      -100
+      iex> Math.Enum.mode [13, 13, 13, 13, 14, 14, 16, 18, 21]
+      13
+      iex> Math.Enum.mode []
+      nil
+  """
+  @spec mode(Enum.t()) :: number | nil
+  def mode(collection)
+
+  def mode(collection) do
+    mode_list = enum_value_with_count(collection)
+
+    case mode_list do
+      [mode | _tail] ->
+        {value, repeated} = mode
+
+        cond do
+          repeated == 1 -> nil
+          true -> value
+        end
+
+      _ ->
+        nil
+    end
+  end
+
+  @spec mode(Enum.t()) :: number | nil
+  defp enum_value_with_count(collection)
+
+  defp enum_value_with_count(collection) do
+    count = Enum.count(collection)
+
+    cond do
+      count === 0 ->
+        nil
+
+      true ->
+        collection
+        |> Enum.group_by(& &1)
+        |> Enum.map(fn {key, value} -> {key, length(value)} end)
+        |> Enum.sort(fn {_key_one, value_one}, {_key_two, value_two} -> value_one >= value_two end)
     end
   end
 end
