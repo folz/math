@@ -7,7 +7,7 @@ defmodule Math do
 
   # For practical uses floats can be considered equal if their difference is less than this value. See <~>.
   @epsilon 1.0e-15
-  
+
   # Theoretical limit is 1.80e308, but Erlang errors at that value, so the practical limit is slightly below that one.
   @max_value 1.79769313486231580793e308
 
@@ -35,7 +35,7 @@ defmodule Math do
   The returned number is a floating-point approximation (as τ is irrational)
   """
   @spec tau :: float
-  def tau, do: pi * 2
+  def tau, do: pi() * 2
 
   @doc """
   The mathematical constant *ℯ* (e).
@@ -55,7 +55,7 @@ defmodule Math do
       iex> 2.3 - 0.3 == 2.0
       false
       iex> 2.3 - 0.3 <~> 2.0
-      true 
+      true
   """
   @spec number <~> number :: boolean
   def x <~> y do
@@ -85,7 +85,7 @@ defmodule Math do
 
   When one of the numbers is a float, returns a `float` by using erlang's `:math.pow/2` function.
 
-  It is possible to calculate roots by choosing *n* between  0.0 and 1.0 (To calculate the *p* -th-root, pass 1/*p* to the function)  
+  It is possible to calculate roots by choosing *n* between  0.0 and 1.0 (To calculate the *p* -th-root, pass 1/*p* to the function)
 
   ## Examples
 
@@ -112,7 +112,7 @@ defmodule Math do
     :math.pow(x, n)
   end
 
-  # Integer implementation. Uses Exponentiation by Squaring. 
+  # Integer implementation. Uses Exponentiation by Squaring.
   defp _pow(x, n, y \\ 1)
   defp _pow(_x, 0, y), do: y
   defp _pow(x, 1, y), do: x * y
@@ -162,7 +162,7 @@ defmodule Math do
   def isqrt(x) when x < 0, do: raise ArithmeticError
 
   def isqrt(x), do: _isqrt(x, 1, div((1 + x), 2))
-    
+
   defp _isqrt(x, m, n) when abs(m - n) <= 1 and n * n <= x, do: n
   defp _isqrt(_x, m, n) when abs(m - n) <= 1, do: n - 1
 
@@ -171,7 +171,7 @@ defmodule Math do
   end
 
 
-  # 
+  #
   @doc """
   Calculates the Greatest Common divisor of two numbers.
 
@@ -191,10 +191,10 @@ defmodule Math do
       6
       iex> Math.gcd(-54, 24)
       6
-  """  
+  """
   @spec gcd(integer, integer) :: non_neg_integer
   def gcd(a, 0), do: abs(a)
-  
+
   def gcd(0, b), do: abs(b)
   def gcd(a, b) when a < 0 or b < 0, do: gcd(abs(a), abs(b))
   def gcd(a, b), do: gcd(b, rem(a,b))
@@ -256,7 +256,7 @@ defmodule Math do
   Calculates the k-permutations of *n*.
 
   This is the number of distinct ways to create groups of size *k* from *n* distinct elements.
-  
+
   Notice that *n* is the first parameter, for easier piping.
 
   ## Examples
@@ -280,7 +280,7 @@ defmodule Math do
 
 
   @doc """
-  Calculates the k-combinations of *n*. 
+  Calculates the k-combinations of *n*.
 
   ## Examples
       iex> Math.k_combinations(10, 2)
@@ -327,7 +327,7 @@ defmodule Math do
 
       iex> Math.log(5, 5)
       1.0
-      iex> Math.log(20, 2) <~> Math.log2(20) 
+      iex> Math.log(20, 2) <~> Math.log2(20)
       true
       iex> Math.log(20, 10) <~> Math.log10(20)
       true
@@ -367,7 +367,7 @@ defmodule Math do
 
       iex>Math.deg2rad(180)
       3.141592653589793
-      
+
   """
   @spec deg2rad(x) :: float
   def deg2rad(x) do
@@ -376,7 +376,7 @@ defmodule Math do
 
   @doc """
   Converts radians to degrees
-  
+
   ## Examples
 
       iex>Math.rad2deg(Math.pi)
