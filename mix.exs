@@ -3,7 +3,7 @@ defmodule Math.Mixfile do
 
   def project do
     [app: :math,
-     version: "0.3.0",
+     version: "0.3.1",
      elixir: "~> 1.2",
      description: description(),
      package: package(),
@@ -72,7 +72,7 @@ defmodule Math.Mixfile do
 
   defp package do
     [
-      maintainers: ["Rodney Folz"],
+      maintainers: ["Rodney Folz", "Wiebe-Marten Wijnja/Qqwy"],
       licenses: ["Apache-2.0"],
       links: %{"GitHub": "https://github.com/folz/math"}
     ]
