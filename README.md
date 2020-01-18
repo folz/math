@@ -54,7 +54,7 @@ Math is [available in Hex](https://hex.pm/packages/math). The package can be ins
 
         def deps do
           [
-            {:math, "~> 0.3.0"}
+            {:math, "~> 0.3.1"}
           ]
         end
 
