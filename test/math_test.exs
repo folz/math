@@ -19,32 +19,32 @@ defmodule MathTest do
 
   test "sin" do
     assert sin(0) <~> 0
-    assert sin(pi/2) <~> 1
-    assert sin(pi) <~> 0
+    assert sin(pi()/2) <~> 1
+    assert sin(pi()) <~> 0
   end
 
   test "cos" do
     assert cos(0) <~> 1
-    assert cos(pi/2) <~> 0
-    assert cos(pi) <~> -1
+    assert cos(pi()/2) <~> 0
+    assert cos(pi()) <~> -1
   end
 
   test "tan" do
     assert tan(0) <~> 0
     # FIXME elixir can't handle infinity
     # assert tan(pi/2) <~> :infinity
-    assert tan(pi) <~> 0
+    assert tan(pi()) <~> 0
   end
 
   test "asin" do
     assert asin(0) <~> 0
-    assert asin(1) <~> pi/2
+    assert asin(1) <~> pi()/2
   end
 
   test "acos" do
-    assert acos(0) <~> pi/2
+    assert acos(0) <~> pi()/2
     assert acos(1) <~> 0
-    assert acos(-1) <~> pi
+    assert acos(-1) <~> pi()
 
     # The following are outside the domain of the inverse cosine
     assert_raise(ArithmeticError, fn -> acos(-1.1) end)
@@ -53,13 +53,13 @@ defmodule MathTest do
 
   test "atan" do
     assert atan(0) <~> 0
-    assert atan(1) <~> pi/4
+    assert atan(1) <~> pi()/4
   end
 
   test "atan2" do
     assert atan2(0, 1) <~> 0
-    assert atan2(1, 0) <~> pi/2
-    assert atan2(1, 1) <~> pi/4
+    assert atan2(1, 0) <~> pi()/2
+    assert atan2(1, 1) <~> pi()/4
   end
 
   test "sinh" do
@@ -106,13 +106,13 @@ defmodule MathTest do
 
   test "exp" do
     assert exp(0) <~> 1
-    assert exp(1) <~> e
+    assert exp(1) <~> e()
     assert exp(log(2)) <~> 2
   end
 
   test "log" do
     assert log(1) <~> 0
-    assert log(e) <~> 1
+    assert log(e()) <~> 1
     assert log(exp(2)) <~> 2
   end
 
