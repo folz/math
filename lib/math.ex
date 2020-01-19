@@ -57,8 +57,8 @@ defmodule Math do
   """
   @spec number <~> number :: boolean
   def x <~> y do
-    absX = abs(x)
-    absY = abs(y)
+    abs_x = abs(x)
+    abs_y = abs(y)
     diff = abs(x - y)
 
     # Hacky comparison for floats that are nearly equal.
@@ -70,7 +70,7 @@ defmodule Math do
         diff < @epsilon
 
       true ->
-        diff / min(absX + absY, @max_value) < @epsilon
+        diff / min(abs_x + abs_y, @max_value) < @epsilon
     end
   end
 

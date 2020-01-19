@@ -166,8 +166,8 @@ defmodule MathTest do
     assert isqrt(9) == 3
     assert isqrt(10) == 3
     assert isqrt(100) == 10
-    assert isqrt(65535) == 255
-    assert isqrt(65536) == 256
+    assert isqrt(65_535) == 255
+    assert isqrt(65_536) == 256
 
     assert isqrt(15_241_578_780_673_678_546_105_778_281_054_720_515_622_620_750_190_521) ==
              123_456_789_123_456_789_123_456_789
