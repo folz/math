@@ -69,6 +69,7 @@ Math is [available in Hex](https://hex.pm/packages/math). The package can be ins
   (Importing allows usage of the `<~>` operator)
 
 ## Changelog
+- 0.3.1 Updates formatting to hide warnings in newer versions of Elixir.
 - 0.3.0 Fixed incorrect median for lists with even number of items. Updated tests.
 - 0.2.0 Added `factorial/1`, `nth_sqrt/2`, `k_permutations/2`, `k_combinations/2`, `gcd/2`, `lcm/2` and `Math.Enum` functions. Improved documentation.
 - 0.1.0 Added integer variant of `pow/1`, `isqrt/2`, `deg2rad/1`, `rad2deg/1`. Improved documentation.
