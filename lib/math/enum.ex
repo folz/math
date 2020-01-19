@@ -42,11 +42,12 @@ defmodule Math.Enum do
       iex> Math.Enum.mean []
       nil
   """
-  @spec mean(Enum.t) :: number
+  @spec mean(Enum.t()) :: number
   def mean(collection)
 
   def mean(collection) do
     count = Enum.count(collection)
+
     case count do
       0 -> nil
       _ -> Enum.sum(collection) / count
@@ -76,23 +77,29 @@ defmodule Math.Enum do
       iex> Math.Enum.median []
       nil
   """
-  @spec median(Enum.t) :: number | nil
+  @spec median(Enum.t()) :: number | nil
   def median(collection)
 
   def median(collection) do
     count = Enum.count(collection)
+
     cond do
-      count == 0 -> nil
-      rem(count, 2) == 1 -> # Middle element exists
+      count == 0 ->
+        nil
+
+      # Middle element exists
+      rem(count, 2) == 1 ->
         Enum.sort(collection) |> Enum.at(div(count, 2))
+
       true ->
         # Take two middle-most elements.
         sorted_collection = Enum.sort(collection)
+
         [
           Enum.at(sorted_collection, div(count, 2)),
           Enum.at(sorted_collection, div(count, 2) - 1)
         ]
-        |> Math.Enum.mean
+        |> Math.Enum.mean()
     end
   end
 end
