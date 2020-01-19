@@ -46,7 +46,8 @@ defmodule Math.Mixfile do
   defp deps do
     [
       {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
-      {:ex_doc, ">= 0.11.4", only: [:docs]}
+      {:ex_doc, ">= 0.11.4", only: [:docs]},
+      {:inch_ex, ">= 0.0.0", only: [:docs]},
     ]
   end
 
