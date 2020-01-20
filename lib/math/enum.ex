@@ -116,10 +116,6 @@ defmodule Math.Enum do
       [2, 3]
       iex> Math.Enum.mode []
       []
-      # iex> Math.Enum.mode [1, 1.0, 2, 3]
-      # [1]
-      # iex> Math.Enum.mode [1, 1.0, 2, 3] &===/1
-      # [1, 1.0]
   """
   @spec mode(Enum.t()) :: Enum.t()
   def mode(collection)
