@@ -128,10 +128,7 @@ defmodule Math.Enum do
     collection
     |> Enum.reduce(%{}, fn k, acc -> Map.update(acc, k, 0, &(&1 + 1)) end)
     |> Enum.group_by(&elem(&1, 1), &elem(&1, 0))
-    |> Enum.max_by(&elem(&1, 0), fn -> [] end)
-    |> (fn
-          [] -> []
-          {_k, v} -> v
-        end).()
+    |> Enum.max_by(&elem(&1, 0), fn -> {nil, []} end)
+    |> elem(1)
   end
 end
