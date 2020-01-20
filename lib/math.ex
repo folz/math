@@ -14,7 +14,6 @@ defmodule Math do
   @type x :: number
   @type y :: number
 
-
   @doc """
   The mathematical constant *π* (pi).
 
@@ -24,8 +23,7 @@ defmodule Math do
   @spec pi :: float
   defdelegate pi, to: :math
 
-  @rad_in_deg (180/:math.pi)
-
+  @rad_in_deg 180 / :math.pi()
 
   @doc """
   The mathematical constant *τ* (tau).
@@ -59,18 +57,20 @@ defmodule Math do
   """
   @spec number <~> number :: boolean
   def x <~> y do
-    absX = abs(x)
-    absY = abs(y)
+    abs_x = abs(x)
+    abs_y = abs(y)
     diff = abs(x - y)
 
     # Hacky comparison for floats that are nearly equal.
     cond do
       x == y ->
         true
+
       x == 0 or y == 0 ->
         diff < @epsilon
+
       true ->
-        diff / min((absX + absY), @max_value) < @epsilon
+        diff / min(abs_x + abs_y, @max_value) < @epsilon
     end
   end
 
@@ -116,9 +116,9 @@ defmodule Math do
   defp _pow(x, n, y \\ 1)
   defp _pow(_x, 0, y), do: y
   defp _pow(x, 1, y), do: x * y
-  defp _pow(x, n, y) when (n < 0), do: _pow(1 / x, -n, y)
+  defp _pow(x, n, y) when n < 0, do: _pow(1 / x, -n, y)
   defp _pow(x, n, y) when rem(n, 2) == 0, do: _pow(x * x, div(n, 2), y)
-  defp _pow(x, n, y), do: _pow(x * x, div((n - 1), 2), x * y)
+  defp _pow(x, n, y), do: _pow(x * x, div(n - 1, 2), x * y)
 
   @doc """
   Calculates the non-negative square root of *x*.
@@ -159,9 +159,9 @@ defmodule Math do
   @spec isqrt(integer) :: integer
   def isqrt(x)
 
-  def isqrt(x) when x < 0, do: raise ArithmeticError
+  def isqrt(x) when x < 0, do: raise(ArithmeticError)
 
-  def isqrt(x), do: _isqrt(x, 1, div((1 + x), 2))
+  def isqrt(x), do: _isqrt(x, 1, div(1 + x, 2))
 
   defp _isqrt(x, m, n) when abs(m - n) <= 1 and n * n <= x, do: n
   defp _isqrt(_x, m, n) when abs(m - n) <= 1, do: n - 1
@@ -169,7 +169,6 @@ defmodule Math do
   defp _isqrt(x, _, n) do
     _isqrt(x, n, div(n + div(x, n), 2))
   end
-
 
   #
   @doc """
@@ -197,7 +196,7 @@ defmodule Math do
 
   def gcd(0, b), do: abs(b)
   def gcd(a, b) when a < 0 or b < 0, do: gcd(abs(a), abs(b))
-  def gcd(a, b), do: gcd(b, rem(a,b))
+  def gcd(a, b), do: gcd(b, rem(a, b))
 
   @doc """
   Calculates the Least Common Multiple of two numbers.
@@ -219,10 +218,10 @@ defmodule Math do
   def lcm(a, b)
 
   def lcm(0, 0), do: 0
+
   def lcm(a, b) do
     abs(Kernel.div(a * b, gcd(a, b)))
   end
-
 
   @precompute_factorials_up_to 1000
   @doc """
@@ -244,12 +243,14 @@ defmodule Math do
 
   def factorial(0), do: 1
 
-  for {n, fact} <- (1..@precompute_factorials_up_to |> Enum.scan( {0, 1}, fn n, {_prev_n, prev_fact} -> {n, n * prev_fact} end)) do
+  for {n, fact} <-
+        1..@precompute_factorials_up_to
+        |> Enum.scan({0, 1}, fn n, {_prev_n, prev_fact} -> {n, n * prev_fact} end) do
     def factorial(unquote(n)), do: unquote(fact)
   end
 
   def factorial(n) when n >= 0 do
-    n * factorial(n-1)
+    n * factorial(n - 1)
   end
 
   @doc """
@@ -278,7 +279,6 @@ defmodule Math do
     div(factorial(n), factorial(n - k))
   end
 
-
   @doc """
   Calculates the k-combinations of *n*.
 
@@ -298,7 +298,6 @@ defmodule Math do
   def k_combinations(n, k) do
     div(factorial(n), factorial(k) * factorial(n - k))
   end
-
 
   # Logarithms and exponentiation
 
@@ -338,6 +337,7 @@ defmodule Math do
   """
   @spec log(x, number) :: float
   def log(x, x), do: 1.0
+
   def log(x, b) do
     :math.log(x) / :math.log(b)
   end
@@ -472,5 +472,4 @@ defmodule Math do
   """
   @spec atanh(x) :: float
   defdelegate atanh(x), to: :math
-
 end
