@@ -125,16 +125,13 @@ defmodule Math.Enum do
   def mode(collection)
 
   def mode(collection) do
-    case Enum.count(collection) do
-      0 ->
-        []
-
-      _ ->
-        collection
-        |> Enum.reduce(%{}, fn k, acc -> Map.update(acc, k, 0, &(&1 + 1)) end)
-        |> Enum.group_by(&elem(&1, 1), &elem(&1, 0))
-        |> Enum.max_by(&elem(&1, 0))
-        |> elem(1)
-    end
+    collection
+    |> Enum.reduce(%{}, fn k, acc -> Map.update(acc, k, 0, &(&1 + 1)) end)
+    |> Enum.group_by(&elem(&1, 1), &elem(&1, 0))
+    |> Enum.max_by(&elem(&1, 0), fn -> [] end)
+    |> (fn
+          [] -> []
+          {_k, v} -> v
+        end).()
   end
 end
