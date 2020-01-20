@@ -6,7 +6,7 @@ defmodule Math.Mixfile do
   def project do
     [
       app: :math,
-      version: "0.3.2",
+      version: "0.4.0",
       elixir: "~> 1.2",
       description: description(),
       package: package(),
