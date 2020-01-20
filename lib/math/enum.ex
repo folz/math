@@ -3,6 +3,7 @@ defmodule Math.Enum do
   Math.Enum defines Math-functions that work on any collection extending the Enumerable protocol.
   This means Maps, Lists, Sets, etc., and any custom collection types as well.
   """
+  require Integer
 
   @doc """
   Calculates the product, obtained by multiplying all elements in *collection* with eachother.
@@ -20,7 +21,7 @@ defmodule Math.Enum do
 
   # General implementation for any enumerable.
   def product(collection) do
-    Enum.reduce(collection, &(&1 * &2))
+    Enum.reduce(collection, &*/2)
   end
 
   @doc """
@@ -82,23 +83,22 @@ defmodule Math.Enum do
 
   def median(collection) do
     count = Enum.count(collection)
+    mid_point = div(count, 2)
 
     cond do
       count == 0 ->
         nil
 
       # Middle element exists
-      rem(count, 2) == 1 ->
-        Enum.sort(collection) |> Enum.at(div(count, 2))
+      Integer.is_odd(count) ->
+        collection
+        |> Enum.sort()
+        |> Enum.fetch!(mid_point)
 
       true ->
-        # Take two middle-most elements.
-        sorted_collection = Enum.sort(collection)
-
-        [
-          Enum.at(sorted_collection, div(count, 2)),
-          Enum.at(sorted_collection, div(count, 2) - 1)
-        ]
+        collection
+        |> Enum.sort()
+        |> Enum.slice((mid_point - 1)..mid_point)
         |> Math.Enum.mean()
     end
   end
