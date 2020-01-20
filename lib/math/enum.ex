@@ -102,4 +102,39 @@ defmodule Math.Enum do
         |> Math.Enum.mean()
     end
   end
+
+  @doc """
+  Calculates the mode of a given collection of numbers.
+
+  Always returns a list. An empty input results in an empty list. Supports bimodal/multimodal collections by returning a list with multiple values.
+
+  ## Examples
+
+      iex> Math.Enum.mode [1, 2, 3, 4, 1]
+      [1]
+      iex> Math.Enum.mode [1, 2, 3, 2, 3]
+      [2, 3]
+      iex> Math.Enum.mode []
+      []
+      # iex> Math.Enum.mode [1, 1.0, 2, 3]
+      # [1]
+      # iex> Math.Enum.mode [1, 1.0, 2, 3] &===/1
+      # [1, 1.0]
+  """
+  @spec mode(Enum.t()) :: Enum.t()
+  def mode(collection)
+
+  def mode(collection) do
+    case Enum.count(collection) do
+      0 ->
+        []
+
+      _ ->
+        collection
+        |> Enum.reduce(%{}, fn k, acc -> Map.update(acc, k, 0, &(&1 + 1)) end)
+        |> Enum.group_by(&elem(&1, 1), &elem(&1, 0))
+        |> Enum.max_by(&elem(&1, 0))
+        |> elem(1)
+    end
+  end
 end
