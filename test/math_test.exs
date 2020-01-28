@@ -174,4 +174,8 @@ defmodule MathTest do
 
     assert_raise ArithmeticError, fn -> isqrt(-2) end
   end
+
+  test "mod_inv!" do
+    assert_raise ArithmeticError, fn -> mod_inv!(1.0, 3.5) end
+  end
 end

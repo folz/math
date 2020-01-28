@@ -474,9 +474,11 @@ defmodule Math do
   defdelegate atanh(x), to: :math
 
   @doc """
-  Computes the modular inverve of a function.
+  Computes the modular multiplicatibe inverse of `a` under modulo `m`
 
-  Given values `a` and `m` calculate a value `b` for `ab = 1 (mod m)`
+  In other words, given integers `a` and `m` calculate a value `b` for `ab = 1 (mod m)`
+
+  Returns an `{:ok, b}` tuple or `{:error, :not_coprime}` when `b` cannot be calculated for the inputs.
 
   ## Examples
 
@@ -491,6 +493,8 @@ defmodule Math do
 
   """
   @spec mod_inv(a :: integer, m :: integer) :: {:ok, integer} | {:error, :not_coprime}
+  def mod_inv(a, m)
+
   def mod_inv(a, m) do
     1..(m - 1)
     |> Enum.find(:not_coprime, &(rem(a * &1, m) == 1))
@@ -498,5 +502,35 @@ defmodule Math do
           :not_coprime -> {:error, :not_coprime}
           x -> {:ok, x}
         end).()
+  end
+
+  @doc """
+  Computes the modular multiplicatibe inverse of `a` under modulo `m`
+
+  Similar to `mod_in/2`, but returns only the value or raises an error.
+
+  ## Examples
+
+      iex> Math.mod_inv! 3, 11
+      4
+      iex> Math.mod_inv! 10, 17
+      12
+      iex> Math.mod_inv! 123, 455
+      37
+      iex> Math.mod_inv! 123, 456
+      ** (ArithmeticError) Inputs are not coprime!
+
+  """
+  @spec mod_inv!(a :: integer, m :: integer) :: integer
+  def mod_inv!(a, m)
+
+  def mod_inv!(a, m) when is_float(a) or is_float(m),
+    do: raise(ArithmeticError, "Inputs cannot be of type float")
+
+  def mod_inv!(a, m) do
+    case mod_inv(a, m) do
+      {:ok, b} -> b
+      _ -> raise ArithmeticError, "Inputs are not coprime!"
+    end
   end
 end
