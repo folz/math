@@ -472,4 +472,31 @@ defmodule Math do
   """
   @spec atanh(x) :: float
   defdelegate atanh(x), to: :math
+
+  @doc """
+  Computes the modular inverve of a function.
+
+  Given values `a` and `m` calculate a value `b` for `ab = 1 (mod m)`
+
+  ## Examples
+
+      iex> Math.mod_inv 3, 11
+      {:ok, 4}
+      iex> Math.mod_inv 10, 17
+      {:ok, 12}
+      iex> Math.mod_inv 123, 455
+      {:ok, 37}
+      iex> Math.mod_inv 123, 456
+      {:error, :not_coprime}
+
+  """
+  @spec mod_inv(a :: integer, m :: integer) :: {:ok, integer} | {:error, :not_coprime}
+  def mod_inv(a, m) do
+    1..(m - 1)
+    |> Enum.find(:not_coprime, &(rem(a * &1, m) == 1))
+    |> (fn
+          :not_coprime -> {:error, :not_coprime}
+          x -> {:ok, x}
+        end).()
+  end
 end
