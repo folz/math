@@ -13,6 +13,8 @@ The Math module adds many useful functions that extend Elixir's standard library
   - `Math.factorial(n)` The *n*-th factorial number.
   - `Math.k_permutations(n, k)` The number of distinct ways to create groups of size *k* from *n* distinct elements.
   - `Math.k_combinations(n, k)` The number of distinct ways to create groups of size *k* from *n* distinct elements where order does not matter.
+  - `Math.mod_inv(a, m)` An integer `b` that fufills `ab = 1 (mod m)`. Returns an ok/error tuple.
+  - `Math.mod_inv!` See `Math.mod_inv`, but returns the value or raises and error.
 
 
 - Logarithms
