@@ -495,7 +495,10 @@ defmodule Math do
   @spec mod_inv(a :: integer, m :: integer) :: {:ok, integer} | {:error, :not_coprime}
   def mod_inv(a, m)
 
-  def mod_inv(a, m) do
+  def mod_inv(a, m) when is_float(a) or is_float(m),
+    do: raise(ArgumentError, "Inputs cannot be of type float")
+
+  def mod_inv(a, m) when is_integer(a) and is_integer(m) do
     1..(m - 1)
     |> Enum.find(:not_coprime, &(rem(a * &1, m) == 1))
     |> (fn
@@ -523,9 +526,6 @@ defmodule Math do
   """
   @spec mod_inv!(a :: integer, m :: integer) :: integer
   def mod_inv!(a, m)
-
-  def mod_inv!(a, m) when is_float(a) or is_float(m),
-    do: raise(ArithmeticError, "Inputs cannot be of type float")
 
   def mod_inv!(a, m) do
     case mod_inv(a, m) do
