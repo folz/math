@@ -9,7 +9,7 @@ defmodule Math do
   @epsilon 1.0e-15
 
   # Theoretical limit is 1.80e308, but Erlang errors at that value, so the practical limit is slightly below that one.
-  @max_value 1.79769313486231580793e308
+  @max_value 1.79_769_313_486_231_580_793e308
 
   @type x :: number
   @type y :: number
