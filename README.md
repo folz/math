@@ -3,7 +3,7 @@
 The Math module adds many useful functions that extend Elixir's standard library.
 
 - General Functions
-  - `a <~> b` Comparison of floats, to check if they are _nearly_ equal.
+  - `a <~> b` Comparison of floats, to check if they are effectively equal (if their absolute difference is less than `@epsilon`).
   - `Math.pow(x, n)` Arithmetic exponentiation. Works both with integer powers and floats.
   - `Math.sqrt(x)` The square root of *x*.
   - `Math.nth_root(x, n)` The n-th root of *x*.
@@ -51,23 +51,27 @@ The Math module adds many useful functions that extend Elixir's standard library
 
 Math is [available in Hex](https://hex.pm/packages/math). The package can be installed by:
 
-  1. Add math to your list of dependencies in `mix.exs`:
+1. Add `math` to your list of dependencies in `mix.exs`:
 
-        def deps do
-          [
-            {:math, "~> 0.3.1"}
-          ]
-        end
+```ex
+def deps do
+  [
+    {:math, "~> 0.4.0"}
+  ]
+end
+```
 
-  2. Require or import the Math library anywhere in your code you'd like:
+2. Require or import the Math library anywhere in your code you'd like:
 
-        require Math
+```ex
+require Math
 
-  or
+# or
 
-        import Math
+import Math
+```
 
-  (Importing allows usage of the `<~>` operator)
+(Importing allows usage of the `<~>` operator)
 
 ## Changelog
 - 0.4.0 Adds `Math.Enum.mode/1`.
