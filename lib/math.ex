@@ -473,6 +473,32 @@ defmodule Math do
   @spec atanh(x) :: float
   defdelegate atanh(x), to: :math
 
+  def egcd_body_recur(a, b)
+
+  def egcd_body_recur(a, b), do: _egcd_body_recur(abs(a), abs(b), 1, 1)
+
+  defp _egcd_body_recur(0, b, _x, _y), do: {b, 0, 1}
+
+  defp _egcd_body_recur(a, b, x, y) do
+    {gcd, x1, y1} = _egcd_body_recur(rem(b, a), a, x, y)
+
+    {gcd, y1 - b / a * x1, x1}
+  end
+
+  def egcd_tail_recur(a, b), do: egcd_tail_recur(abs(a), abs(b), 0, 1, 1, 0)
+
+  def egcd_tail_recur(0, b, s, t, _u, _v), do: {b, s, t}
+
+  def egcd_tail_recur(a, b, s, t, u, v) do
+    q = div(b, a)
+    r = rem(b, a)
+
+    m = s - u * q
+    n = t - v * q
+
+    egcd_tail_recur(r, a, u, v, m, n)
+  end
+
   @doc """
   Computes the modular multiplicatibe inverse of `a` under modulo `m`
 

@@ -182,4 +182,24 @@ defmodule MathTest do
   test "mod_inv!" do
     assert_raise ArgumentError, fn -> mod_inv!(1.0, 3.5) end
   end
+
+  test "egcd_body_recur" do
+    assert egcd_body_recur(2, 4) |> elem(0) == 2
+    assert egcd_body_recur(2, 3) |> elem(0) == 1
+    assert egcd_body_recur(12, 8) |> elem(0) == 4
+    assert egcd_body_recur(54, 24) |> elem(0) == 6
+    assert egcd_body_recur(-54, 24) |> elem(0) == 6
+  end
+
+  test "egcd_tail_recur" do
+    assert egcd_tail_recur(2, 4) |> elem(0) == 2
+    assert egcd_tail_recur(2, 3) |> elem(0) == 1
+    assert egcd_tail_recur(12, 8) |> elem(0) == 4
+    assert egcd_tail_recur(54, 24) |> elem(0) == 6
+    assert egcd_tail_recur(-54, 24) |> elem(0) == 6
+  end
+
+  test "egcd s and t" do
+    assert egcd_body_recur(2, 4) == egcd_tail_recur(2, 4)
+  end
 end
