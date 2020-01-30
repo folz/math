@@ -201,5 +201,31 @@ defmodule MathTest do
 
   test "egcd s and t" do
     assert egcd_body_recur(2, 4) == egcd_tail_recur(2, 4)
+    big_a = 1_234_567_890_987_654_321
+    big_b = 987_654_321
+    assert egcd_body_recur(big_a, big_b) == egcd_tail_recur(big_a, big_b)
+  end
+
+  test "time gcd implementations" do
+    pairs = [
+      {2, 4},
+      {234, 567},
+      {34_567, 890_123},
+      {1_234_567_890_987_654_321, 987_654_321}
+    ]
+
+    gcd = &gcd(&1, &2)
+    egcd_b = &egcd_body_recur(&1, &2)
+    egcd_t = &egcd_tail_recur(&1, &2)
+
+    for p <- pairs do
+      for func <- [gcd, egcd_b, egcd_t] do
+        {a, b} = p
+
+        :timer.tc(fn -> func.(a, b) end)
+        |> elem(0)
+      end
+    end
+    |> IO.inspect()
   end
 end
