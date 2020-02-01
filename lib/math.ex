@@ -197,6 +197,19 @@ defmodule Math do
 
   @doc """
   See `Math.gcd/2`. Calculates integers `s` and `t` for `as + bt = gcd(a, b)`
+
+  ## Examples
+
+      iex> Math.egcd(2, 4)
+      {2, 1, 0}
+      iex> Math.egcd(2, 3)
+      {1, -1, 1}
+      iex> Math.egcd(12, 8)
+      {4, 1, -1}
+      iex> Math.egcd(54, 24)
+      {6, 1, -2}
+      iex> Math.egcd(-54, 24)
+      {6, 1, -2}
   """
   @spec egcd(integer, integer) :: non_neg_integer
   def egcd(a, b) when is_integer(a) and is_integer(b), do: _egcd(abs(a), abs(b), 0, 1, 1, 0)
