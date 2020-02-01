@@ -192,11 +192,26 @@ defmodule Math do
       6
   """
   @spec gcd(integer, integer) :: non_neg_integer
-  def gcd(a, 0), do: abs(a)
 
-  def gcd(0, b), do: abs(b)
-  def gcd(a, b) when a < 0 or b < 0, do: gcd(abs(a), abs(b))
-  def gcd(a, b), do: gcd(b, rem(a, b))
+  def gcd(a, b) when is_integer(a) and is_integer(b), do: egcd(a, b) |> elem(0)
+
+  @doc """
+  See `Math.gcd/2`. Calculates integers `s` and `t` for `as + bt = gcd(a, b)`
+  """
+  @spec egcd(integer, integer) :: non_neg_integer
+  def egcd(a, b) when is_integer(a) and is_integer(b), do: _egcd(abs(a), abs(b), 0, 1, 1, 0)
+
+  defp _egcd(0, b, s, t, _u, _v), do: {b, s, t}
+
+  defp _egcd(a, b, s, t, u, v) do
+    q = div(b, a)
+    r = rem(b, a)
+
+    m = s - u * q
+    n = t - v * q
+
+    _egcd(r, a, u, v, m, n)
+  end
 
   @doc """
   Calculates the Least Common Multiple of two numbers.
@@ -473,32 +488,6 @@ defmodule Math do
   @spec atanh(x) :: float
   defdelegate atanh(x), to: :math
 
-  def egcd_body_recur(a, b)
-
-  def egcd_body_recur(a, b), do: _egcd_body_recur(abs(a), abs(b), 1, 1)
-
-  defp _egcd_body_recur(0, b, _x, _y), do: {b, 0, 1}
-
-  defp _egcd_body_recur(a, b, x, y) do
-    {gcd, x1, y1} = _egcd_body_recur(rem(b, a), a, x, y)
-
-    {gcd, y1 - div(b, a) * x1, x1}
-  end
-
-  def egcd_tail_recur(a, b), do: _egcd_tail_recur(abs(a), abs(b), 0, 1, 1, 0)
-
-  defp _egcd_tail_recur(0, b, s, t, _u, _v), do: {b, s, t}
-
-  defp _egcd_tail_recur(a, b, s, t, u, v) do
-    q = div(b, a)
-    r = rem(b, a)
-
-    m = s - u * q
-    n = t - v * q
-
-    _egcd_tail_recur(r, a, u, v, m, n)
-  end
-
   @doc """
   Computes the modular multiplicatibe inverse of `a` under modulo `m`
 
@@ -525,12 +514,10 @@ defmodule Math do
     do: raise(ArgumentError, "Inputs cannot be of type float")
 
   def mod_inv(a, m) when is_integer(a) and is_integer(m) do
-    1..(m - 1)
-    |> Enum.find(:not_coprime, &(rem(a * &1, m) == 1))
-    |> (fn
-          :not_coprime -> {:error, :not_coprime}
-          x -> {:ok, x}
-        end).()
+    case egcd(a, m) do
+      {1, s, _t} -> {:ok, rem(s + m, m)}
+      _ -> {:error, :not_coprime}
+    end
   end
 
   @doc """
