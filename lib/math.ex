@@ -196,7 +196,11 @@ defmodule Math do
   def gcd(a, b) when is_integer(a) and is_integer(b), do: egcd(a, b) |> elem(0)
 
   @doc """
-  See `Math.gcd/2`. Calculates integers `s` and `t` for `as + bt = gcd(a, b)`
+  Calculates integers  `gcd`, `s`, and `t` for `as + bt = gcd(a, b)`
+
+  Also see `Math.gcd/2`.
+
+  Returns a tuple: `{gcd, s, t}`
 
   ## Examples
 
