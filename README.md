@@ -1,5 +1,8 @@
 # Math
 
+[![hex.pm version](https://img.shields.io/hexpm/v/math.svg)](https://hex.pm/packages/math)
+[![Build Status](https://travis-ci.org/folz/math.svg?branch=master)](https://travis-ci.org/folz/math)
+
 The Math module adds many useful functions that extend Elixir's standard library.
 
 - General Functions
