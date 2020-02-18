@@ -9,7 +9,7 @@ defmodule Math do
   @epsilon 1.0e-15
 
   # Theoretical limit is 1.80e308, but Erlang errors at that value, so the practical limit is slightly below that one.
-  @max_value 1.79769313486231580793e308
+  @max_value 1.79_769_313_486_231_580_793e308
 
   @type x :: number
   @type y :: number
@@ -192,11 +192,43 @@ defmodule Math do
       6
   """
   @spec gcd(integer, integer) :: non_neg_integer
-  def gcd(a, 0), do: abs(a)
 
-  def gcd(0, b), do: abs(b)
-  def gcd(a, b) when a < 0 or b < 0, do: gcd(abs(a), abs(b))
-  def gcd(a, b), do: gcd(b, rem(a, b))
+  def gcd(a, b) when is_integer(a) and is_integer(b), do: egcd(a, b) |> elem(0)
+
+  @doc """
+  Calculates integers  `gcd`, `s`, and `t` for `as + bt = gcd(a, b)`
+
+  Also see `Math.gcd/2`.
+
+  Returns a tuple: `{gcd, s, t}`
+
+  ## Examples
+
+      iex> Math.egcd(2, 4)
+      {2, 1, 0}
+      iex> Math.egcd(2, 3)
+      {1, -1, 1}
+      iex> Math.egcd(12, 8)
+      {4, 1, -1}
+      iex> Math.egcd(54, 24)
+      {6, 1, -2}
+      iex> Math.egcd(-54, 24)
+      {6, 1, -2}
+  """
+  @spec egcd(integer, integer) :: non_neg_integer
+  def egcd(a, b) when is_integer(a) and is_integer(b), do: _egcd(abs(a), abs(b), 0, 1, 1, 0)
+
+  defp _egcd(0, b, s, t, _u, _v), do: {b, s, t}
+
+  defp _egcd(a, b, s, t, u, v) do
+    q = div(b, a)
+    r = rem(b, a)
+
+    m = s - u * q
+    n = t - v * q
+
+    _egcd(r, a, u, v, m, n)
+  end
 
   @doc """
   Calculates the Least Common Multiple of two numbers.
@@ -472,4 +504,63 @@ defmodule Math do
   """
   @spec atanh(x) :: float
   defdelegate atanh(x), to: :math
+
+  @doc """
+  Computes the modular multiplicatibe inverse of `a` under modulo `m`
+
+  In other words, given integers `a` and `m` calculate a value `b` for `ab = 1 (mod m)`
+
+  Returns an `{:ok, b}` tuple or `{:error, :not_coprime}` when `b` cannot be calculated for the inputs.
+
+  ## Examples
+
+      iex> Math.mod_inv 3, 11
+      {:ok, 4}
+      iex> Math.mod_inv 10, 17
+      {:ok, 12}
+      iex> Math.mod_inv 123, 455
+      {:ok, 37}
+      iex> Math.mod_inv 123, 456
+      {:error, :not_coprime}
+
+  """
+  @spec mod_inv(a :: integer, m :: integer) :: {:ok, integer} | {:error, :not_coprime}
+  def mod_inv(a, m)
+
+  def mod_inv(a, m) when is_float(a) or is_float(m),
+    do: raise(ArgumentError, "Inputs cannot be of type float")
+
+  def mod_inv(a, m) when is_integer(a) and is_integer(m) do
+    case egcd(a, m) do
+      {1, s, _t} -> {:ok, rem(s + m, m)}
+      _ -> {:error, :not_coprime}
+    end
+  end
+
+  @doc """
+  Computes the modular multiplicatibe inverse of `a` under modulo `m`
+
+  Similar to `mod_in/2`, but returns only the value or raises an error.
+
+  ## Examples
+
+      iex> Math.mod_inv! 3, 11
+      4
+      iex> Math.mod_inv! 10, 17
+      12
+      iex> Math.mod_inv! 123, 455
+      37
+      iex> Math.mod_inv! 123, 456
+      ** (ArithmeticError) Inputs are not coprime!
+
+  """
+  @spec mod_inv!(a :: integer, m :: integer) :: integer
+  def mod_inv!(a, m)
+
+  def mod_inv!(a, m) do
+    case mod_inv(a, m) do
+      {:ok, b} -> b
+      _ -> raise ArithmeticError, "Inputs are not coprime!"
+    end
+  end
 end

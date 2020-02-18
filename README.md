@@ -9,10 +9,13 @@ The Math module adds many useful functions that extend Elixir's standard library
   - `Math.nth_root(x, n)` The n-th root of *x*.
   - `Math.isqrt(x)`  The integer square root of *x*.
   - `Math.gcd(a, b)` The greatest common divisor of *a* and *b*.
+  - `Math.egcd(a, b)` Calculates integers *gcd*, *s*, and *t* in `as + bt = gcd(a,b)`. See also `Math.gcd(a, b)`
   - `Math.lcm(a, b)` The least common multiple of *a* and *b*.
   - `Math.factorial(n)` The *n*-th factorial number.
   - `Math.k_permutations(n, k)` The number of distinct ways to create groups of size *k* from *n* distinct elements.
   - `Math.k_combinations(n, k)` The number of distinct ways to create groups of size *k* from *n* distinct elements where order does not matter.
+  - `Math.mod_inv(a, m)` An integer *b* that fufills `ab = 1 (mod m)`. Returns an ok/error tuple.
+  - `Math.mod_inv!(a, m)` See `Math.mod_inv(a, m)`, but returns the value or raises an error.
 
 
 - Logarithms
