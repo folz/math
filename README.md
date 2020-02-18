@@ -77,6 +77,7 @@ import Math
 (Importing allows usage of the `<~>` operator)
 
 ## Changelog
+- 0.5.0 Adds `Math.mod_inv`, `Math.mod_inv!` and `Math.egcd`
 - 0.4.0 Adds `Math.Enum.mode/1`.
 - 0.3.1 Updates formatting to hide warnings in newer versions of Elixir.
 - 0.3.0 Fixed incorrect median for lists with even number of items. Updated tests.
