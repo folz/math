@@ -7,7 +7,7 @@ defmodule Math.Mixfile do
     [
       app: :math,
       version: "0.5.0",
-      elixir: "~> 1.2",
+      elixir: "~> 1.4",
       description: description(),
       package: package(),
       deps: deps(),
