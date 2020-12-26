@@ -127,4 +127,61 @@ defmodule Math.Enum do
     |> Enum.max_by(&elem(&1, 0), fn -> {nil, []} end)
     |> elem(1)
   end
+
+  @doc """
+  Calculates the variance of a given collection of numbers.
+
+  If the collection is empty, returns `nil`
+
+  ## Examples
+      iex> Math.Enum.variance [1, 2, 3, 4, 5]
+      2.0
+      iex> Math.Enum.variance 1..10
+      8.25
+      iex> Math.Enum.variance [1, 2, 3, 4, 5, -100]
+      1475.138888888889
+      iex> Math.Enum.variance []
+      nil
+  """
+
+  @spec variance(Enum.t()) :: number | nil
+  def variance(collection)
+
+  def variance(collection) do
+    count = Enum.count(collection)
+
+    case count do
+      0 -> nil
+      _ ->
+        mean_square = (Enum.map(collection, &Math.pow(&1, 2)) |> Enum.sum()) / count
+        squared_mean = mean(collection) |> Math.pow(2)
+        mean_square - squared_mean
+    end
+  end
+
+  @doc """
+  Calculates the standard deviation of a given collection of numbers.
+
+  If the collection is empty, returns `nil`
+
+  ## Examples
+      iex> Math.Enum.stdev([1,2,3,4,5])
+      1.4142135623730951
+      iex> Math.Enum.stdev 1..10
+      2.8722813232690143
+      iex> Math.Enum.stdev [1,2,3,4,5,-100] 
+      38.407536876098796
+      iex> Math.Enum.stdev []              
+      nil
+  """
+
+  @spec stdev(Enum.t()) :: number | nil
+  def stdev(collection)
+
+  def stdev(collection) do
+    case variance(collection) do
+      nil -> nil
+      res -> Math.sqrt(res)
+    end
+  end
 end
