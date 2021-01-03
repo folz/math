@@ -52,6 +52,8 @@ The Math module adds many useful functions that extend Elixir's standard library
   - `Math.Enum.mean(collection)` the mean of the numbers in the collection.
   - `Math.Enum.median(collection)` the median of the numbers in the collection.
   - `Math.Enum.mode(collection)` the mode of the numbers in the collection.
+  - `Math.Enum.variance(collection)` variance of the numbers in the collection.
+  - `Math.Enum.stdev(collection)` the standard deviation of the numbers in the collection.
 
 ## Installation
 
@@ -62,7 +64,7 @@ Math is [available in Hex](https://hex.pm/packages/math). The package can be ins
 ```ex
 def deps do
   [
-    {:math, "~> 0.4.0"}
+    {:math, "~> 0.6.0"}
   ]
 end
 ```
@@ -80,6 +82,7 @@ import Math
 (Importing allows usage of the `<~>` operator)
 
 ## Changelog
+- 0.6.0 Adds `Math.Enum.variance/1` and `Math.Enum.stdev/1`. Thank you, @TenTakano !
 - 0.5.0 Adds `Math.mod_inv`, `Math.mod_inv!` and `Math.egcd`
 - 0.4.0 Adds `Math.Enum.mode/1`.
 - 0.3.1 Updates formatting to hide warnings in newer versions of Elixir.
