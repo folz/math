@@ -182,4 +182,73 @@ defmodule MathTest do
   test "mod_inv!" do
     assert_raise ArgumentError, fn -> mod_inv!(1.0, 3.5) end
   end
+
+  test "linear_interpolation" do
+    p0 = {0, 0}
+    p1 = {1, 1}
+
+    1..100
+    |> Enum.map(fn value -> value / 100 end)
+    |> Enum.each(
+      fn value ->
+        assert linear_interpolation(value, p0, p1) == {value, value}
+      end
+    )
+
+    assert linear_interpolation(1.5, {0, 0}, {1, 1}) == {1.5, 1.5}
+  end
+
+  test "linear_interpolation!" do
+    p0 = {0, 0}
+    p1 = {1, 1}
+
+    1..100
+    |> Enum.map(fn value -> value / 100 end)
+    |> Enum.each(
+      fn value ->
+        assert linear_interpolation!(value, p0, p1) == {value, value}
+      end
+    )
+
+    assert_raise ArgumentError, fn ->  linear_interpolation!(1.5, {0, 0}, {1, 1}) end
+  end
+
+  test "bezier_curve" do
+    p0 = {0, 0}
+    p1 = {1, 1}
+    p2 = {2, 2}
+
+    1..100
+    |> Enum.map(fn value -> value / 100 end)
+    |> Enum.each(
+      fn t ->
+        expected_value = 2 * (1 - t) * t + 2 * t * t
+        {x, y} = bezier_curve!(t, [p0, p1, p2])
+        assert x <~> expected_value
+        assert y <~> expected_value
+      end
+    )
+
+    assert bezier_curve(1.5, [{0, 0}, {1, 1}]) == {1.5, 1.5}
+  end
+
+  test "bezier_curve!" do
+    p0 = {0, 0}
+    p1 = {1, 1}
+    p2 = {2, 2}
+
+    1..100
+    |> Enum.map(fn value -> value / 100 end)
+    |> Enum.each(
+      fn t ->
+        expected_value = 2 * (1 - t) * t + 2 * t * t
+        {x, y} = bezier_curve!(t, [p0, p1, p2])
+        assert x <~> expected_value
+        assert y <~> expected_value
+      end
+    )
+
+    assert_raise ArgumentError, fn ->  bezier_curve!(1.5, [{0, 0}, {1, 1}]) end
+  end
+
 end
