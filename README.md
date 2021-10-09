@@ -47,6 +47,10 @@ The Math module adds many useful functions that extend Elixir's standard library
   - `Math.acosh(x)` The inverse hyperbolic cosine of *x*.
   - `Math.atanh(x)` The inverse hyperbolic tangent of *x*.
 
+- Interpolation
+  - `Math.linear_interpolation(t,p0,p1)` Returns {x,y} of t in a linear interpolation
+  - `Math.bezier_curve(t,[p0,p1 ...])` Returns {x,y} of t in a bezier_curve
+
 - Working with Collections
   - `Math.Enum.product(collection)` The result of multiplying all elements in the passed collection.
   - `Math.Enum.mean(collection)` the mean of the numbers in the collection.

@@ -563,4 +563,114 @@ defmodule Math do
       _ -> raise ArithmeticError, "Inputs are not coprime!"
     end
   end
+
+  # Interpolation
+
+  @doc """
+  Computes the y value of a given t point on a bezier_curve
+
+      ## Examples
+
+      iex> Math.bezier_curve(0.5, [{0,0}, {1,1}])
+      {0.5,0.5}
+
+  """
+  def bezier_curve(t, control_points) when is_list(control_points)do
+
+    new_points =
+      control_points
+    |> Enum.with_index()
+    |> Enum.slice(0..-2)
+    |> Enum.map(
+      fn {p0, index} ->
+          next_index = index + 1
+          p1 = Enum.at(control_points, next_index)
+          linear_interpolation(t, p0, p1)
+      end
+    )
+
+    if Enum.count(new_points) == 1 do
+      Enum.at(new_points, 0)
+    else
+      bezier_curve(t, new_points)
+    end
+  end
+
+  @doc """
+  Computes the y value of a given t point on a bezier_curve
+
+  Similar to `bezier_curve/2`, but raises an error if not on range [0,1].
+
+    ## Examples
+
+      iex> Math.bezier_curve!(0.5, [{0,0}, {1,1}])
+      {0.5,0.5}
+
+      iex> Math.bezier_curve!(1.5, [{0,0}, {1,1}])
+      ** (ArgumentError) t is not beetween 0 and 1
+  """
+
+  def bezier_curve!(t, control_points)
+    when is_number(t)
+    and 0.0 <= t
+    and t <= 1.0
+    and is_list(control_points) do
+      bezier_curve(t, control_points)
+  end
+
+  def bezier_curve!(t, control_points)
+    when is_number(t)
+    and is_list(control_points) do
+      raise ArgumentError, "t is not beetween 0 and 1"
+  end
+
+  @doc """
+  Computes the y value of a given t point on a linear_interpolation between 2 points
+
+  ## Examples
+
+      iex> Math.linear_interpolation(0.5, {0,0}, {1,1})
+      {0.5, 0.5}
+  """
+  def linear_interpolation(t, p0, p1)
+      when is_number(t)
+      and is_tuple(p0)
+      and is_tuple(p1) do
+      {p0x, p0y} = p0
+      {p1x, p1y} = p1
+      {
+        (1 - t) * p0x + t * p1x,
+        (1 - t) * p0y + t * p1y
+      }
+  end
+
+  @doc """
+  Computes the point of a given t on a linear_interpolation between 2 points
+
+  Similar to `linear_interpolation/3`, but raises an error if not on range [0,1].
+
+  ## Examples
+
+      iex> Math.linear_interpolation!(0.5, {0,0}, {1,1})
+      {0.5,0.5}
+
+      iex> Math.linear_interpolation!(1.5, {0,0}, {1,1})
+      ** (ArgumentError) t is not beetween 0 and 1
+  """
+  def linear_interpolation!(t, p0, p1)
+      when is_number(t)
+      and 0.0 <= t
+      and t <= 1.0
+      and is_tuple(p0)
+      and is_tuple(p1) do
+    linear_interpolation(t, p0, p1)
+  end
+
+  def linear_interpolation!(t, p0, p1)
+      when is_number(t)
+      and is_tuple(p0)
+      and is_tuple(p1) do
+    raise ArgumentError, "t is not beetween 0 and 1"
+  end
+
 end
