@@ -569,13 +569,16 @@ defmodule Math do
   @doc """
   Computes the y value of a given t point on a bezier_curve
 
+  If t is not in range [0,1] returns the interpolated point outside control points bounding box
+
       ## Examples
 
       iex> Math.bezier_curve(0.5, [{0,0}, {1,1}])
       {0.5,0.5}
 
   """
-  def bezier_curve(t, control_points) when is_list(control_points)do
+  @spec bezier_curve(t :: number, control_points :: maybe_improper_list) :: tuple
+  def bezier_curve(t, control_points) when is_list(control_points) and is_number(t) do
 
     new_points =
       control_points
@@ -609,7 +612,7 @@ defmodule Math do
       iex> Math.bezier_curve!(1.5, [{0,0}, {1,1}])
       ** (ArgumentError) t is not beetween 0 and 1
   """
-
+  @spec bezier_curve!(t :: number, control_points :: maybe_improper_list) :: tuple
   def bezier_curve!(t, control_points)
     when is_number(t)
     and 0.0 <= t
@@ -627,11 +630,14 @@ defmodule Math do
   @doc """
   Computes the y value of a given t point on a linear_interpolation between 2 points
 
+  If t is not in range [0,1] returns the interpolated point outside control points bounding box
+
   ## Examples
 
       iex> Math.linear_interpolation(0.5, {0,0}, {1,1})
       {0.5, 0.5}
   """
+  @spec linear_interpolation(t :: number, p0 :: tuple, p1 :: tuple) :: tuple
   def linear_interpolation(t, p0, p1)
       when is_number(t)
       and is_tuple(p0)
@@ -666,6 +672,7 @@ defmodule Math do
       iex> Math.linear_interpolation!(1.5, {0,0}, {1,1})
       ** (ArgumentError) t is not beetween 0 and 1
   """
+  @spec linear_interpolation!(t :: number, p0 :: tuple, p1 :: tuple) :: tuple
   def linear_interpolation!(t, p0, p1)
       when is_number(t)
       and 0.0 <= t
