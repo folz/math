@@ -636,12 +636,21 @@ defmodule Math do
       when is_number(t)
       and is_tuple(p0)
       and is_tuple(p1) do
-      {p0x, p0y} = p0
-      {p1x, p1y} = p1
-      {
-        (1 - t) * p0x + t * p1x,
-        (1 - t) * p0y + t * p1y
-      }
+
+      last = tuple_size(p0) - 1
+
+      0..last
+      |> Enum.reduce({},
+        fn index, tuple ->
+          first_elem = p0 |> elem(index)
+          second_elem = p1 |> elem(index)
+
+          tuple
+          |> Tuple.append(
+            (1 - t) * first_elem + t * second_elem
+          )
+        end
+      )
   end
 
   @doc """
