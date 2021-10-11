@@ -86,6 +86,7 @@ import Math
 (Importing allows usage of the `<~>` operator)
 
 ## Changelog
+- 0.7.0 adds `Math.linear_interpolation/3` and `Math.bezier_curve/2`. Thank you, @pcarvsilva !
 - 0.6.0 Adds `Math.Enum.variance/1` and `Math.Enum.stdev/1`. Thank you, @TenTakano !
 - 0.5.0 Adds `Math.mod_inv`, `Math.mod_inv!` and `Math.egcd`
 - 0.4.0 Adds `Math.Enum.mode/1`.
