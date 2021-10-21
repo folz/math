@@ -627,6 +627,73 @@ defmodule Math do
       raise ArgumentError, "t is not beetween 0 and 1"
   end
 
+  @spec interpolation(f :: (number, number, number-> number), t :: number, p0 :: tuple, p1 :: tuple) :: tuple
+  @doc """
+  Computes the y value of a given t point on a interpolation between 2 points
+
+  If t is not in range [0,1] returns the interpolated point anyway
+
+  ## Examples
+
+      iex> Math.interpolation(fn t,x,y -> (1 - t) * x + t * y end, 0.5, {0,0}, {1,1})
+      {0.5, 0.5}
+  """
+
+  def interpolation(f, t, p0, p1)
+      when is_function(f,3)
+      and is_number(t)
+      and is_tuple(p0)
+      and is_tuple(p1) do
+
+      last = tuple_size(p0) - 1
+
+      0..last
+      |> Enum.reduce({},
+        fn index, tuple ->
+          first_elem = p0 |> elem(index)
+          second_elem = p1 |> elem(index)
+
+          tuple
+          |> Tuple.append(
+            f.(t,first_elem,second_elem)
+          )
+        end
+      )
+  end
+
+  @doc """
+  Computes the y value of a given t point on a interpolation between 2 points
+
+  Similar to `linear_interpolation/3`, but raises an error if not on range [0,1].
+
+  ## Examples
+
+      iex> Math.interpolation!(fn t,x,y -> (1 - t) * x + t * y end,0.5, {0,0}, {1,1})
+      {0.5, 0.5}
+
+      iex> Math.interpolation!(fn t,x,y -> (1 - t) * x + t * y end,1.5, {0,0}, {1,1})
+      ** (ArgumentError) t is not beetween 0 and 1
+  """
+
+  @spec interpolation!(f :: (number, number, number -> number), t :: number, p0 :: tuple, p1 :: tuple) :: tuple
+  def interpolation!(f, t, p0, p1)
+    when is_function(f,3)
+      and is_number(t)
+      and 0.0 <= t
+      and t <= 1.0
+      and is_tuple(p0)
+      and is_tuple(p1) do
+      interpolation(f, t, p0, p1)
+  end
+
+  def interpolation!(f, t, p0, p1)
+      when is_function(f,3)
+      and is_number(t)
+      and is_tuple(p0)
+      and is_tuple(p1) do
+    raise ArgumentError, "t is not beetween 0 and 1"
+  end
+
   @doc """
   Computes the y value of a given t point on a linear_interpolation between 2 points
 
@@ -643,20 +710,8 @@ defmodule Math do
       and is_tuple(p0)
       and is_tuple(p1) do
 
-      last = tuple_size(p0) - 1
+      interpolation(fn t,x,y -> (1 - t) * x + t * y end, t, p0, p1)
 
-      0..last
-      |> Enum.reduce({},
-        fn index, tuple ->
-          first_elem = p0 |> elem(index)
-          second_elem = p1 |> elem(index)
-
-          tuple
-          |> Tuple.append(
-            (1 - t) * first_elem + t * second_elem
-          )
-        end
-      )
   end
 
   @doc """
