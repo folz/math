@@ -627,7 +627,7 @@ defmodule Math do
       raise ArgumentError, "t is not beetween 0 and 1"
   end
 
-  @spec interpolation(f :: (number, number, number-> number), t :: number, p0 :: tuple, p1 :: tuple) :: tuple
+  @spec interpolation(t :: number, p0 :: tuple, p1 :: tuple, f :: (number, number, number -> number)) :: tuple
   @doc """
   Computes the y value of a given t point on a interpolation between 2 points
 
@@ -635,11 +635,11 @@ defmodule Math do
 
   ## Examples
 
-      iex> Math.interpolation(fn t,x,y -> (1 - t) * x + t * y end, 0.5, {0,0}, {1,1})
+      iex> Math.interpolation(0.5, {0,0}, {1,1}, fn t,x,y -> (1 - t) * x + t * y end)
       {0.5, 0.5}
   """
 
-  def interpolation(f, t, p0, p1)
+  def interpolation(t, p0, p1, f)
       when is_function(f,3)
       and is_number(t)
       and is_tuple(p0)
@@ -668,25 +668,25 @@ defmodule Math do
 
   ## Examples
 
-      iex> Math.interpolation!(fn t,x,y -> (1 - t) * x + t * y end,0.5, {0,0}, {1,1})
+      iex> Math.interpolation!(0.5, {0,0}, {1,1}, fn t,x,y -> (1 - t) * x + t * y end)
       {0.5, 0.5}
 
-      iex> Math.interpolation!(fn t,x,y -> (1 - t) * x + t * y end,1.5, {0,0}, {1,1})
+      iex> Math.interpolation!(1.5, {0,0}, {1,1}, fn t,x,y -> (1 - t) * x + t * y end)
       ** (ArgumentError) t is not beetween 0 and 1
   """
 
-  @spec interpolation!(f :: (number, number, number -> number), t :: number, p0 :: tuple, p1 :: tuple) :: tuple
-  def interpolation!(f, t, p0, p1)
+  @spec interpolation!(t :: number, p0 :: tuple, p1 :: tuple, f :: (number, number, number -> number)) :: tuple
+  def interpolation!(t, p0, p1, f)
     when is_function(f,3)
       and is_number(t)
       and 0.0 <= t
       and t <= 1.0
       and is_tuple(p0)
       and is_tuple(p1) do
-      interpolation(f, t, p0, p1)
+      interpolation(t, p0, p1, f)
   end
 
-  def interpolation!(f, t, p0, p1)
+  def interpolation!(t, p0, p1, f)
       when is_function(f,3)
       and is_number(t)
       and is_tuple(p0)
@@ -710,7 +710,7 @@ defmodule Math do
       and is_tuple(p0)
       and is_tuple(p1) do
 
-      interpolation(fn t,x,y -> (1 - t) * x + t * y end, t, p0, p1)
+      interpolation(t, p0, p1, fn t,x,y -> (1 - t) * x + t * y end)
 
   end
 
