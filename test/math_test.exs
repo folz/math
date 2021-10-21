@@ -183,6 +183,36 @@ defmodule MathTest do
     assert_raise ArgumentError, fn -> mod_inv!(1.0, 3.5) end
   end
 
+  test "interpolation" do
+    p0 = {0, 0}
+    p1 = {1, 1}
+
+    1..100
+    |> Enum.map(fn value -> value / 100 end)
+    |> Enum.each(
+      fn value ->
+        assert interpolation(fn t,x,y -> (1 - t) * x + t * y end,value, p0, p1) == {value, value}
+      end
+    )
+
+    assert interpolation(fn t,x,y -> (1 - t) * x + t * y end,1.5, {0, 0}, {1, 1}) == {1.5, 1.5}
+  end
+
+  test "interpolation!" do
+    p0 = {0, 0}
+    p1 = {1, 1}
+
+    1..100
+    |> Enum.map(fn value -> value / 100 end)
+    |> Enum.each(
+      fn value ->
+        assert interpolation!(fn t,x,y -> (1 - t) * x + t * y end, value, p0, p1) == {value, value}
+      end
+    )
+
+    assert_raise ArgumentError, fn ->  interpolation!(fn t,x,y -> (1 - t) * x + t * y end, 1.5, {0, 0}, {1, 1}) end
+  end
+
   test "linear_interpolation" do
     p0 = {0, 0}
     p1 = {1, 1}
