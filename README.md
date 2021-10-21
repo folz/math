@@ -49,6 +49,7 @@ The Math module adds many useful functions that extend Elixir's standard library
 
 - Interpolation
   - `Math.linear_interpolation(t,p0,p1)` Returns {x,y} of t in a linear interpolation
+  - `Math.interpolation(fn t,x,y end, t,[p0,p1 ...])` Returns {x,y} of t in a given function of interpolation
   - `Math.bezier_curve(t,[p0,p1 ...])` Returns {x,y} of t in a bezier_curve
 
 - Working with Collections
