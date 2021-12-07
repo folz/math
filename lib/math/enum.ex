@@ -6,7 +6,7 @@ defmodule Math.Enum do
   require Integer
 
   @doc """
-  Calculates the product, obtained by multiplying all elements in *collection* with eachother.
+  Calculates the product, obtained by multiplying all elements in *collection* with each other.
 
   ## Examples
 
@@ -16,6 +16,7 @@ defmodule Math.Enum do
       3628800
       iex> Math.Enum.product [1,2,3,4,5, -100]
       -12000
+
   """
   def product(collection)
 
@@ -29,11 +30,12 @@ defmodule Math.Enum do
 
   This is the sum, divided by the amount of elements in the collection.
 
-  If the collection is empty, returns `nil`
+  If the collection is empty, returns `nil`.
 
-  Also see `Math.Enum.median/1`
+  Also see `Math.Enum.median/1`.
 
   ## Examples
+
       iex> Math.Enum.mean [1,2,3]
       2.0
       iex> Math.Enum.mean 1..10
@@ -42,6 +44,7 @@ defmodule Math.Enum do
       -14.166666666666666
       iex> Math.Enum.mean []
       nil
+
   """
   @spec mean(Enum.t()) :: number
   def mean(collection)
@@ -61,9 +64,9 @@ defmodule Math.Enum do
   - If the collection has an odd number of elements, this will be the middle-most element of the (sorted) collection.
   - If the collection has an even number of elements, this will be mean of the middle-most two elements of the (sorted) collection.
 
-  If the collection is empty, returns `nil`
+  If the collection is empty, returns `nil`.
 
-  Also see `Math.Enum.mean/1`
+  Also see `Math.Enum.mean/1`.
 
   ## Examples
 
@@ -77,6 +80,7 @@ defmodule Math.Enum do
       1.5
       iex> Math.Enum.median []
       nil
+
   """
   @spec median(Enum.t()) :: number | nil
   def median(collection)
@@ -116,6 +120,7 @@ defmodule Math.Enum do
       [2, 3]
       iex> Math.Enum.mode []
       []
+
   """
   @spec mode(Enum.t()) :: Enum.t()
   def mode(collection)
@@ -131,9 +136,10 @@ defmodule Math.Enum do
   @doc """
   Calculates the variance of a given collection of numbers.
 
-  If the collection is empty, returns `nil`
+  If the collection is empty, returns `nil`.
 
   ## Examples
+
       iex> Math.Enum.variance [1, 2, 3, 4, 5]
       2.0
       iex> Math.Enum.variance 1..10
@@ -142,8 +148,8 @@ defmodule Math.Enum do
       1475.138888888889
       iex> Math.Enum.variance []
       nil
-  """
 
+  """
   @spec variance(Enum.t()) :: number | nil
   def variance(collection)
 
@@ -162,19 +168,20 @@ defmodule Math.Enum do
   @doc """
   Calculates the standard deviation of a given collection of numbers.
 
-  If the collection is empty, returns `nil`
+  If the collection is empty, returns `nil`.
 
   ## Examples
+
       iex> Math.Enum.stdev([1,2,3,4,5])
       1.4142135623730951
       iex> Math.Enum.stdev 1..10
       2.8722813232690143
-      iex> Math.Enum.stdev [1,2,3,4,5,-100] 
+      iex> Math.Enum.stdev [1,2,3,4,5,-100]
       38.407536876098796
-      iex> Math.Enum.stdev []              
+      iex> Math.Enum.stdev []
       nil
-  """
 
+  """
   @spec stdev(Enum.t()) :: number | nil
   def stdev(collection)
 

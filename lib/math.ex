@@ -18,7 +18,7 @@ defmodule Math do
   The mathematical constant *π* (pi).
 
   The ratio of a circle's circumference to its diameter.
-  The returned number is a floating-point approximation (as π is irrational)
+  The returned number is a floating-point approximation (as π is irrational).
   """
   @spec pi :: float
   defdelegate pi, to: :math
@@ -30,7 +30,7 @@ defmodule Math do
 
   The ratio of a circle's circumference to its radius.
   Defined as 2 * π, but preferred by some mathematicians.
-  The returned number is a floating-point approximation (as τ is irrational)
+  The returned number is a floating-point approximation (as τ is irrational).
   """
   @spec tau :: float
   def tau, do: pi() * 2
@@ -54,6 +54,7 @@ defmodule Math do
       false
       iex> 2.3 - 0.3 <~> 2.0
       true
+
   """
   @spec number <~> number :: boolean
   def x <~> y do
@@ -85,7 +86,7 @@ defmodule Math do
 
   When one of the numbers is a float, returns a `float` by using erlang's `:math.pow/2` function.
 
-  It is possible to calculate roots by choosing *n* between  0.0 and 1.0 (To calculate the *p* -th-root, pass 1/*p* to the function)
+  It is possible to calculate roots by choosing *n* between  0.0 and 1.0 (To calculate the *p* -th-root, pass 1/*p* to the function).
 
   ## Examples
 
@@ -101,6 +102,7 @@ defmodule Math do
       7.888609052210118e69
       iex> Math.pow(2, (1 / 2))
       1.4142135623730951
+
   """
   @spec pow(number, number) :: number
   def pow(x, n)
@@ -135,13 +137,14 @@ defmodule Math do
       3.0
       iex> Math.nth_root(65536, 8)
       4.0
+
   """
   @spec nth_root(x, number) :: float
   def nth_root(x, n)
   def nth_root(x, n), do: pow(x, 1 / n)
 
   @doc """
-  Calculates the non-negative integer square root of *x* (rounded towards zero)
+  Calculates the non-negative integer square root of *x* (rounded towards zero).
 
   Does not accept negative numbers as input.
 
@@ -155,6 +158,7 @@ defmodule Math do
       256
       iex> Math.isqrt(10)
       3
+
   """
   @spec isqrt(integer) :: integer
   def isqrt(x)
@@ -176,7 +180,7 @@ defmodule Math do
 
   This is the largest positive integer that divides both *a* and *b* without leaving a remainder.
 
-  Also see `Math.lcm/2`
+  Also see `Math.lcm/2`.
 
   ## Examples
 
@@ -190,13 +194,14 @@ defmodule Math do
       6
       iex> Math.gcd(-54, 24)
       6
+
   """
   @spec gcd(integer, integer) :: non_neg_integer
 
   def gcd(a, b) when is_integer(a) and is_integer(b), do: egcd(a, b) |> elem(0)
 
   @doc """
-  Calculates integers  `gcd`, `s`, and `t` for `as + bt = gcd(a, b)`
+  Calculates integers  `gcd`, `s`, and `t` for `as + bt = gcd(a, b)`.
 
   Also see `Math.gcd/2`.
 
@@ -214,6 +219,7 @@ defmodule Math do
       {6, 1, -2}
       iex> Math.egcd(-54, 24)
       {6, 1, -2}
+
   """
   @spec egcd(integer, integer) :: non_neg_integer
   def egcd(a, b) when is_integer(a) and is_integer(b), do: _egcd(abs(a), abs(b), 0, 1, 1, 0)
@@ -245,6 +251,7 @@ defmodule Math do
       21
       iex> Math.lcm(21, 6)
       42
+
   """
   @spec lcm(integer, integer) :: non_neg_integer
   def lcm(a, b)
@@ -257,7 +264,7 @@ defmodule Math do
 
   @precompute_factorials_up_to 1000
   @doc """
-  Calculates the factorial of *n*: 1 * 2 * 3 * ... * *n*
+  Calculates the factorial of *n*: 1 * 2 * 3 * ... * *n*.
 
   To make this function faster, values of *n* up to `#{@precompute_factorials_up_to}` are precomputed at compile time.
 
@@ -269,6 +276,7 @@ defmodule Math do
       120
       iex> Math.factorial(20)
       2432902008176640000
+
   """
   @spec factorial(non_neg_integer) :: pos_integer
   def factorial(n)
@@ -315,12 +323,14 @@ defmodule Math do
   Calculates the k-combinations of *n*.
 
   ## Examples
+
       iex> Math.k_combinations(10, 2)
       45
       iex> Math.k_combinations(5, 5)
       1
       iex> Math.k_combinations(3, 4)
       0
+
   """
   @spec k_combinations(non_neg_integer, non_neg_integer) :: non_neg_integer
   def k_combinations(n, k)
@@ -348,7 +358,7 @@ defmodule Math do
   defdelegate log(x), to: :math
 
   @doc """
-  Calculates the base-*b* logarithm of *x*
+  Calculates the base-*b* logarithm of *x*.
 
   Note that variants for the most common logarithms exist that are faster and more precise.
 
@@ -366,6 +376,7 @@ defmodule Math do
       0.5
       iex> Math.log(10, 4)
       1.6609640474436813
+
   """
   @spec log(x, number) :: float
   def log(x, x), do: 1.0
@@ -393,7 +404,7 @@ defmodule Math do
   # Trigonometry
 
   @doc """
-  Converts degrees to radians
+  Converts degrees to radians.
 
   ## Examples
 
@@ -407,12 +418,13 @@ defmodule Math do
   end
 
   @doc """
-  Converts radians to degrees
+  Converts radians to degrees.
 
   ## Examples
 
       iex>Math.rad2deg(Math.pi)
       180.0
+
   """
   @spec rad2deg(x) :: float
   def rad2deg(x) do
@@ -442,25 +454,25 @@ defmodule Math do
   defdelegate tan(x), to: :math
 
   @doc """
-  Computes the arc sine of *x*. (expressed in radians)
+  Computes the arc sine of *x*. (expressed in radians).
   """
   @spec asin(x) :: float
   defdelegate asin(x), to: :math
 
   @doc """
-  Computes the arc cosine of *x*. (expressed in radians)
+  Computes the arc cosine of *x*. (expressed in radians).
   """
   @spec acos(x) :: float
   defdelegate acos(x), to: :math
 
   @doc """
-  Computes the arc tangent of *x*. (expressed in radians)
+  Computes the arc tangent of *x*. (expressed in radians).
   """
   @spec atan(x) :: float
   defdelegate atan(x), to: :math
 
   @doc """
-  Computes the arc tangent given *y* and *x*. (expressed in radians)
+  Computes the arc tangent given *y* and *x*. (expressed in radians).
 
   This variant returns the inverse tangent in the correct quadrant, as the signs of both *x* and *y* are known.
   """
@@ -506,9 +518,9 @@ defmodule Math do
   defdelegate atanh(x), to: :math
 
   @doc """
-  Computes the modular multiplicatibe inverse of `a` under modulo `m`
+  Computes the modular multiplicatibe inverse of `a` under modulo `m`.
 
-  In other words, given integers `a` and `m` calculate a value `b` for `ab = 1 (mod m)`
+  In other words, given integers `a` and `m` calculate a value `b` for `ab = 1 (mod m)`.
 
   Returns an `{:ok, b}` tuple or `{:error, :not_coprime}` when `b` cannot be calculated for the inputs.
 
@@ -538,7 +550,7 @@ defmodule Math do
   end
 
   @doc """
-  Computes the modular multiplicatibe inverse of `a` under modulo `m`
+  Computes the modular multiplicatibe inverse of `a` under modulo `m`.
 
   Similar to `mod_in/2`, but returns only the value or raises an error.
 
@@ -567,9 +579,9 @@ defmodule Math do
   # Interpolation
 
   @doc """
-  Computes the y value of a given t point on a bezier_curve
+  Computes the y value of a given t point on a bezier_curve.
 
-  If t is not in range [0,1] returns the interpolated point outside control points bounding box
+  If t is not in range [0,1] returns the interpolated point outside control points bounding box.
 
       ## Examples
 
@@ -600,7 +612,7 @@ defmodule Math do
   end
 
   @doc """
-  Computes the y value of a given t point on a bezier_curve
+  Computes the y value of a given t point on a bezier_curve.
 
   Similar to `bezier_curve/2`, but raises an error if not on range [0,1].
 
@@ -610,7 +622,8 @@ defmodule Math do
       {0.5,0.5}
 
       iex> Math.bezier_curve!(1.5, [{0,0}, {1,1}])
-      ** (ArgumentError) t is not beetween 0 and 1
+      ** (ArgumentError) t is not between 0 and 1
+
   """
   @spec bezier_curve!(t :: number, control_points :: maybe_improper_list) :: tuple
   def bezier_curve!(t, control_points)
@@ -624,18 +637,19 @@ defmodule Math do
   def bezier_curve!(t, control_points)
     when is_number(t)
     and is_list(control_points) do
-      raise ArgumentError, "t is not beetween 0 and 1"
+      raise ArgumentError, "t is not between 0 and 1"
   end
 
   @doc """
-  Computes the y value of a given t point on a linear_interpolation between 2 points
+  Computes the y value of a given t point on a linear_interpolation between 2 points.
 
-  If t is not in range [0,1] returns the interpolated point outside control points bounding box
+  If t is not in range [0,1] returns the interpolated point outside control points bounding box.
 
   ## Examples
 
       iex> Math.linear_interpolation(0.5, {0,0}, {1,1})
       {0.5, 0.5}
+
   """
   @spec linear_interpolation(t :: number, p0 :: tuple, p1 :: tuple) :: tuple
   def linear_interpolation(t, p0, p1)
@@ -660,7 +674,7 @@ defmodule Math do
   end
 
   @doc """
-  Computes the point of a given t on a linear_interpolation between 2 points
+  Computes the point of a given t on a linear_interpolation between 2 points.
 
   Similar to `linear_interpolation/3`, but raises an error if not on range [0,1].
 
@@ -670,7 +684,8 @@ defmodule Math do
       {0.5,0.5}
 
       iex> Math.linear_interpolation!(1.5, {0,0}, {1,1})
-      ** (ArgumentError) t is not beetween 0 and 1
+      ** (ArgumentError) t is not between 0 and 1
+
   """
   @spec linear_interpolation!(t :: number, p0 :: tuple, p1 :: tuple) :: tuple
   def linear_interpolation!(t, p0, p1)
@@ -686,7 +701,6 @@ defmodule Math do
       when is_number(t)
       and is_tuple(p0)
       and is_tuple(p1) do
-    raise ArgumentError, "t is not beetween 0 and 1"
+    raise ArgumentError, "t is not between 0 and 1"
   end
-
 end

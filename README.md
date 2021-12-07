@@ -1,7 +1,11 @@
 # Math
 
-[![hex.pm version](https://img.shields.io/hexpm/v/math.svg)](https://hex.pm/packages/math)
 [![Build Status](https://travis-ci.org/folz/math.svg?branch=master)](https://travis-ci.org/folz/math)
+[![Module Version](https://img.shields.io/hexpm/v/math.svg)](https://hex.pm/packages/math)
+[![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/math/)
+[![Total Download](https://img.shields.io/hexpm/dt/math.svg)](https://hex.pm/packages/math)
+[![License](https://img.shields.io/hexpm/l/math.svg)](https://github.com/folz/math/blob/master/LICENSE)
+[![Last Updated](https://img.shields.io/github/last-commit/folz/math.svg)](https://github.com/folz/math/commits/master)
 
 The Math module adds many useful functions that extend Elixir's standard library.
 
@@ -63,29 +67,30 @@ The Math module adds many useful functions that extend Elixir's standard library
 
 Math is [available in Hex](https://hex.pm/packages/math). The package can be installed by:
 
-1. Add `math` to your list of dependencies in `mix.exs`:
+1. Add `:math` to your list of dependencies in `mix.exs`:
 
-```ex
-def deps do
-  [
-    {:math, "~> 0.6.0"}
-  ]
-end
-```
+   ```elixir
+   def deps do
+     [
+       {:math, "~> 0.6.0"}
+     ]
+   end
+   ```
 
 2. Require or import the Math library anywhere in your code you'd like:
 
-```ex
-require Math
+   ```elixir
+   require Math
 
-# or
+   # or
 
-import Math
-```
+   import Math
+   ```
 
 (Importing allows usage of the `<~>` operator)
 
 ## Changelog
+
 - 0.7.0 adds `Math.linear_interpolation/3` and `Math.bezier_curve/2`. Thank you, @pcarvsilva !
 - 0.6.0 Adds `Math.Enum.variance/1` and `Math.Enum.stdev/1`. Thank you, @TenTakano !
 - 0.5.0 Adds `Math.mod_inv`, `Math.mod_inv!` and `Math.egcd`
@@ -95,3 +100,17 @@ import Math
 - 0.2.0 Added `factorial/1`, `nth_sqrt/2`, `k_permutations/2`, `k_combinations/2`, `gcd/2`, `lcm/2` and `Math.Enum` functions. Improved documentation.
 - 0.1.0 Added integer variant of `pow/1`, `isqrt/2`, `deg2rad/1`, `rad2deg/1`. Improved documentation.
 - 0.0.1 First implementation, mostly a wrapper around Erlang's `:math` library.
+
+## Copyright and License
+
+Copyright (c) 2016 Rodney Folz <rodney@rodneyfolz.com>
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at [https://www.apache.org/licenses/LICENSE-2.0](https://www.apache.org/licenses/LICENSE-2.0)
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
