@@ -68,7 +68,7 @@ Math is [available in Hex](https://hex.pm/packages/math). The package can be ins
 ```ex
 def deps do
   [
-    {:math, "~> 0.6.0"}
+    {:math, "~> 0.7.0"}
   ]
 end
 ```
