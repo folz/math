@@ -59,7 +59,6 @@ The Math module adds many useful functions that extend Elixir's standard library
   - `Math.Enum.mode(collection)` the mode of the numbers in the collection.
   - `Math.Enum.variance(collection)` variance of the numbers in the collection.
   - `Math.Enum.stdev(collection)` the standard deviation of the numbers in the collection.
-  - `Math.Enum.histogram(collection)` builds an histogram of the collection.
 
 ## Installation
 
