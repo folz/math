@@ -47,12 +47,12 @@ defmodule Math.Enum do
   def mean(collection)
 
   def mean(collection) do
-    count = Enum.count(collection)
-
-    case count do
-      0 -> nil
-      _ -> Enum.sum(collection) / count
-    end
+    collection
+    |> Enum.reduce({nil, 0}, fn
+      elem, {nil, 0} -> {elem, 1}
+      elem, {mean, count} -> {(mean * count + elem) / (count + 1), count + 1}
+    end)
+    |> elem(0)
   end
 
   @doc """
