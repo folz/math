@@ -43,7 +43,7 @@ defmodule Math.Enum do
       iex> Math.Enum.mean []
       nil
   """
-  @spec mean(Enum.t()) :: number
+  @spec mean(Enum.t()) :: number | nil
   def mean(collection)
 
   def mean(collection) do
