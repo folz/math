@@ -49,7 +49,7 @@ defmodule Math.Enum do
   def mean(collection) do
     collection
     |> Enum.reduce({nil, 0}, fn
-      elem, {nil, 0} -> {elem, 1}
+      elem, {nil, 0} -> {elem * 1.0, 1}
       elem, {mean, count} -> {(mean * count + elem) / (count + 1), count + 1}
     end)
     |> elem(0)
