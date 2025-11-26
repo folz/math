@@ -654,7 +654,8 @@ defmodule Math do
           second_elem = p1 |> elem(index)
 
           tuple
-          |> Tuple.append(
+          |> Tuple.insert_at(
+          index,
             f.(t,first_elem,second_elem)
           )
         end
