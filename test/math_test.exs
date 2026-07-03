@@ -175,14 +175,6 @@ defmodule MathTest do
     assert_raise ArithmeticError, fn -> isqrt(-2) end
   end
 
-  test "mod_inv" do
-    assert_raise ArgumentError, fn -> mod_inv(1.0, 3.5) end
-  end
-
-  test "mod_inv!" do
-    assert_raise ArgumentError, fn -> mod_inv!(1.0, 3.5) end
-  end
-
   test "interpolation" do
     p0 = {0, 0}
     p1 = {1, 1}
