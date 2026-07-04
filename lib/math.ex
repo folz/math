@@ -583,7 +583,7 @@ defmodule Math do
     new_points =
       control_points
     |> Enum.with_index()
-    |> Enum.slice(0..-2//1)
+    |> Enum.drop(-1)
     |> Enum.map(
       fn {p0, index} ->
           next_index = index + 1
